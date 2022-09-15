@@ -1,10 +1,9 @@
 import React from 'react'
 import globals from '../../globals'
+import { FilmitemType } from '../../types/filmitem'
 import './filmitem.css'
 
-type FilmitemType = {
-  title: string, beschreibung: string, imgPath:string, releaseJahr:string
-} | null
+
 
 
 function Filmitem(props?:FilmitemType) {

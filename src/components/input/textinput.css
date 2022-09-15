@@ -1,0 +1,16 @@
+.container{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input{
+    width: 80%;
+    height:45px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size:x-large;
+    padding-left:10px;
+    padding-right:10px;
+}
