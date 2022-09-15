@@ -15,6 +15,15 @@
 .text{
     max-height:150px;
 }
+.bewertung{
+    position:absolute;
+    transform:translateY(-20%);
+    right:0;
+    top:0;
+}
+.relative{
+    position:relative;
+}
 .picture{
     max-height:120px;
     text-align: center;

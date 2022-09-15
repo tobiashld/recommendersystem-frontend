@@ -1,12 +1,14 @@
-import React from 'react'
-import globals from '../../globals'
+import React, { useState } from 'react'
 import { FilmitemType } from '../../types/filmitem'
+import TextInput from '../input/textinput'
 import './filmitem.css'
 
+interface FilmitemTypeErweitert extends FilmitemType {
+  changeRating:((value:number)=>void)
+}
 
 
-
-function Filmitem(props?:FilmitemType) {
+function Filmitem(props:FilmitemTypeErweitert) {
   if(!props || !props.title || !props.beschreibung || !props.imgPath){
     console.log('filmitem props überprüfen!')
 
@@ -14,7 +16,6 @@ function Filmitem(props?:FilmitemType) {
   }
     
   let bereinigteBeschreibung = new String(props.beschreibung)
-
 
   if(props.beschreibung.split(" ").length >= 45){
     bereinigteBeschreibung = props.beschreibung.split(" ").slice(0,45).join(" ")+ " ";
@@ -32,8 +33,13 @@ function Filmitem(props?:FilmitemType) {
             <div className='flex-vier'>
               {props.title}
             </div>
-            <div className='flex-eins'>
-              3/5
+            <div className='flex-eins relative'>
+              <div className={'row flex bewertung'}>
+                <TextInput pattern="/^[0-9]+$/" placeholder={props.userGivenRating.toString()} size='Small'/>
+                 <p className=''>
+                  /5
+                  </p> 
+              </div>
             </div>
           </div>
           <div className={"full-width description"}>

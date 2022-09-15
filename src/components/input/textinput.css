@@ -1,16 +1,42 @@
 .container{
-    width:100%;
+    width:80%;
+    position:relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.icon{
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 4px;
+    position: absolute;
+    box-sizing:border-box;
+    top:50%;
+    left:10px;
+    transform: translateY(-80%);
+}
+
+.input-icon{
+    padding-left: 3rem;
+}
+.input-wo-icon{
+    padding-left:1rem;
+}
+
+
 .input{
-    width: 80%;
-    height:45px;
+    
     border-radius: 7px;
     text-decoration: none;
     font-size:x-large;
-    padding-left:10px;
-    padding-right:10px;
+    padding-right:1rem;
+}
+.Big{
+    height:3rem;
+    width: 100%;
+}
+.Small{
+    height:2rem;
+    width: 1rem;
 }
