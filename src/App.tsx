@@ -10,6 +10,8 @@ import Dropdown from './components/dropdown/dropdown';
 
 function App() {
   const [dropdown, setDropdown] = useState(false);
+  const [dropdownContent, setDropdownContent] = useState<FilmitemType[]>([]);
+
   const [filmList, setFilmList] = useState<FilmitemType[]>(
     [
       {
@@ -31,13 +33,15 @@ function App() {
     ]
   )
 
-  let searchAction = (event : React.KeyboardEvent<HTMLInputElement>) => {
+  let searchAction = async (event : React.KeyboardEvent<HTMLInputElement>) => {
     if(event.currentTarget.value && event.currentTarget.value !== ""){
       setDropdown(true);
     }else{
       setDropdown(false);
     }
-    solrservice.suchFilmeZuVolltext(event.currentTarget.value)
+    let filmSuche = await solrservice.suchFilmeZuVolltext(event.currentTarget.value);
+    console.log(filmSuche)
+    setDropdownContent(filmSuche)
   }
 
   let changeRating = (id:string, value:number) => {
@@ -57,7 +61,7 @@ function App() {
       <div className="login-box">
           <h3>Recommendersystem</h3>
           <TextInput onKeyUp={(event)=>searchAction(event)}  icon={<BiSearch />}/>
-          {dropdown?<Dropdown />:<></>}
+          {dropdown?<Dropdown items={dropdownContent}/>:<></>}
           <div className='wrapper'>
             <div className="divider"></div>
           </div>

@@ -1,8 +1,9 @@
 import React from 'react'
+import { FilmitemType } from '../../types/filmitem'
 
-function Dropdown() {
+function Dropdown(props:any) {
   return (
-    <div>Dropdown</div>
+    <div>{props.items.map((value:FilmitemType)=>value.title)}</div>
   )
 }
 
