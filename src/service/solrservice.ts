@@ -12,6 +12,7 @@ function suchFilmeZuVolltext(suchString:string){
         })
         .then(response=>response.json())
         .then(responsejson=>console.log(responsejson))
+        .catch(error=>{throw new Error(error)})
 }
 
 export default {
