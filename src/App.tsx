@@ -5,7 +5,6 @@ import './App.css';
 import { FilmitemType } from './types/filmitem';
 import TextInput from './components/input/textinput';
 import solrservice from './service/solrservice';
-import { Search } from '@mui/icons-material';
 
 function App() {
   const [benutzerkennung, setBenutzerkennung] = useState("");
@@ -29,7 +28,7 @@ function App() {
     <div className="App">
       <div className="login-box">
           <h3>Recommendersystem</h3>
-          <TextInput onKeyUp={(event)=>solrservice.suchFilmeZuVolltext(event.currentTarget.value)} icon={<Search />} />
+          <TextInput onKeyUp={(event)=>solrservice.suchFilmeZuVolltext(event.currentTarget.value)}  />
           
           <div className='wrapper'>
             <div className="divider"></div>

@@ -16,10 +16,10 @@ function TextInput(props:params) {
 
   return (
     <div className='container'>
-        <div className="icon">{props.icon}</div>
+        {props.icon?<div className="icon">{props.icon}</div>:<></>}
         <input 
             type="text"
-            className='input'
+            className={props.icon?'input input-icon':'input'}
             onClick={(event)=>{if(props.onClick)props.onClick(event)}}
             onChange={(event)=>{if(props.onChange)props.onChange(event)}}
             onKeyDown={(event)=>{if(props.onKeyDown)props.onKeyDown(event)}}
