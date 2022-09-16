@@ -2,7 +2,7 @@ function suchFilmeZuVolltext(suchString:string){
 
     suchString = suchString.split(" ").length > 1?'"'+suchString+'"~2':"*"+suchString+"*";
 
-    return fetch("https://solrrecommendersystem.cf:8984/solr/filme/select?debugQuery=false&indent=true&q.op=OR&q=volltextName%3A"+suchString+"",
+    fetch("https://solrrecommendersystem.cf:8984/solr/filme/select?debugQuery=false&indent=true&q.op=OR&q=volltextName%3A"+suchString+"",
         {
             method: "GET",
             mode:'cors', 
@@ -11,7 +11,7 @@ function suchFilmeZuVolltext(suchString:string){
             }
         })
         .then(response=>response.json())
-        .then(responsejson=>
+        .then((responsejson)=>
             mapping(responsejson)
             )
         .catch(error=>{throw new Error(error)})
@@ -42,7 +42,7 @@ function suchFilmeZuVolltext(suchString:string){
     }
 
 function mapping(responseJson:any){
-
+  console.log(responseJson)
 }
 
 
