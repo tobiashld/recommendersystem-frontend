@@ -36,6 +36,15 @@ img {
 .row{
   flex-direction: row;
 }
+.column{
+  flex-direction:column
+}
+.searchbox{
+  display: flex;
+  position:relative;
+  justify-content: center;
+  width:100%
+}
 
 .login-box{
   background-color: white;
@@ -49,6 +58,10 @@ img {
   align-items: center;
 }
 
+.login-box>h5{
+  margin:0;
+  margin-bottom:15px;
+}
 
 .wrapper{
   padding-top:30px;

@@ -37,7 +37,7 @@ function suchFilmeZuVolltext(suchString:string){
             }
           ]
 
-          return Promise.resolve(test)
+          return Promise.resolve((result:any)=>test)
 
     }
 

@@ -6,6 +6,7 @@ type params = {
     onChange?: ((event:React.ChangeEvent<HTMLInputElement>)=>void),
     onKeyDown?: ((event:React.KeyboardEvent<HTMLInputElement>)=>void),
     onKeyUp?: ((event:React.KeyboardEvent<HTMLInputElement>)=>void),
+    onBlur?: ((event:React.FocusEvent<HTMLInputElement, Element>)=>void)
     style?: string,
     pattern?: string,
     placeholder?:string,
@@ -15,6 +16,10 @@ type params = {
 }
 
 function TextInput(props:params) {
+  if(!props){
+    return (<div className='container'><input className='Big input'/></div>)
+  }
+
 
   let classNames = props.size && props.size === 'Small'?'Small':'Big';
   classNames += props.icon?' input input-icon':' input input-wo-icon';
@@ -31,7 +36,7 @@ function TextInput(props:params) {
             onKeyUp={(event)=>{if(props.onKeyUp)props.onKeyUp(event)}}
             placeholder={props.placeholder?props.placeholder:undefined}     
             pattern={props.pattern?props.pattern:undefined}   
-            
+            onBlur={(event)=>{if(props.onBlur)props.onBlur(event)}}
         >{props.children}</input>
     </div>
   )

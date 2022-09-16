@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Filmitem from './components/filmitem/filmitem';
 import logo from './logo.svg';
 import './App.css';
@@ -7,9 +7,10 @@ import TextInput from './components/input/textinput';
 import solrservice from './service/solrservice';
 import { BiSearch } from 'react-icons/bi'
 import Dropdown from './components/dropdown/dropdown';
+import useOutsideAlerter from './hooks/useOutsideAlert';
 
 function App() {
-  const [dropdown, setDropdown] = useState(false);
+  const [dropdown, setDropdown] = useState(true);
   const [dropdownContent, setDropdownContent] = useState<FilmitemType[]>([]);
 
   const [filmList, setFilmList] = useState<FilmitemType[]>(
@@ -34,6 +35,7 @@ function App() {
   )
 
   let searchAction = async (event : React.KeyboardEvent<HTMLInputElement>) => {
+    
     if(event.currentTarget.value && event.currentTarget.value !== ""){
       setDropdown(true);
     }else{
@@ -42,7 +44,10 @@ function App() {
     let filmSuche = await solrservice.suchFilmeZuVolltext(event.currentTarget.value);
     console.log(filmSuche)
     setDropdownContent(filmSuche)
+    
   }
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef,()=>setDropdown(false));
 
   let changeRating = (id:string, value:number) => {
     let x : FilmitemType[]= [...filmList];
@@ -60,11 +65,16 @@ function App() {
     <div className="App">
       <div className="login-box">
           <h3>Recommendersystem</h3>
-          <TextInput onKeyUp={(event)=>searchAction(event)}  icon={<BiSearch />}/>
-          {dropdown?<Dropdown items={dropdownContent}/>:<></>}
+          <div className='searchbox'>
+            <TextInput onKeyUp={(event)=>searchAction(event)} onBlur={()=>setDropdown(false)} icon={<BiSearch />}/>
+            {dropdown?<Dropdown items={dropdownContent} onItemClick={()=>{}}/>:<></>}
+          </div>
+
+          
           <div className='wrapper'>
             <div className="divider"></div>
           </div>
+          <h5>Zum Benutzerprofil hinzugefügte Filme</h5>
           {filmList.map(item=>
               <Filmitem 
                   id={item.id}

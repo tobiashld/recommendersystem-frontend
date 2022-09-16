@@ -1,0 +1,24 @@
+.loading-container{
+    display:flex;
+    justify-content: center;
+}
+.item-wrapper{
+    max-height:100px;
+    height:auto;
+    display:flex;
+    flex-direction: row;
+    width:100%;
+}
+.item-wrapper>.picture{
+    width:50px;
+}
+.item-wrapper>.flex.column{
+    flex:1,
+}
+.item-wrapper .flex.column>*{
+    margin:0;
+}
+.item-wrapper:hover{
+    cursor: pointer;
+    background-color: rgb(245, 245, 245);
+}
