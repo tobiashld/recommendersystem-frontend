@@ -21,6 +21,15 @@
     right:0;
     top:0;
 }
+.delete{
+    transform: translateY(20%);
+    margin-left:5px;
+    margin-right:5px;
+}
+.delete:hover{
+    color:red; 
+    
+}
 .relative{
     position:relative;
 }

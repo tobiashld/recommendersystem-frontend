@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { FilmitemType } from '../../types/filmitem'
 import TextInput from '../input/textinput'
+import { AiFillDelete } from 'react-icons/ai'
 import './filmitem.css'
 
 interface FilmitemTypeErweitert extends FilmitemType {
-  changeRating:((value:number)=>void)
+  changeRating:((value:number)=>void),
+  onDelete:((item:FilmitemType)=>void)
 }
 
 
@@ -32,6 +34,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
           <div className={"full-width title top-line"}>
             <div className='flex-vier'>
               {props.title}
+              <AiFillDelete className='delete' onClick={()=>{props.onDelete(props)}}/>
             </div>
             <div className='flex-eins relative'>
               <div className={'row flex bewertung'}>

@@ -49,7 +49,7 @@ function App() {
   let changeRating = (id:string, value:number) => {
     let x : FilmitemType[]= [...filmList];
     let index : number = x.findIndex((film)=>film.id === id)
-    if(index == -1){
+    if(index === -1){
       console.log("Den zu bewertenden Film gibt es nicht in der Filmliste!");
       return;
     }
@@ -60,9 +60,24 @@ function App() {
 
   let handleDropdownClick = (item:FilmitemType|undefined)=>{
     if(item){
-      let helperArr = filmList;
-      helperArr.push(item)
-      setFilmList(helperArr)
+      if(!filmList.find(filmitem=>filmitem.id === item.id)){
+        let helperArr = filmList;
+        helperArr.push(item)
+        setFilmList(helperArr)
+      }
+      setReload(!reload)
+      setDropdown(false)
+    }
+  }
+
+  let deleteItem = (item:FilmitemType|undefined)=>{
+    if(item){
+      let index = filmList.findIndex(filmitem=>filmitem.id === item.id)
+      if(index !== -1){
+        let helperArr = filmList;
+        helperArr.splice(index)
+        setFilmList(helperArr)
+      }
       setReload(!reload)
       setDropdown(false)
     }
@@ -73,7 +88,7 @@ function App() {
       <div className="login-box">
           <h3>Recommendersystem</h3>
           <div className='searchbox'>
-            <TextInput onKeyUp={(event)=>searchAction(event)} onBlur={()=>setDropdown(true)} icon={<BiSearch />}/>
+            <TextInput onKeyUp={(event)=>searchAction(event)} onBlur={()=>setDropdown(false)} icon={<BiSearch />} onFocusPointOut={true}/>
             {dropdown?<Dropdown items={dropdownContent} onItemClick={handleDropdownClick}/>:<></>}
           </div>
 
@@ -91,7 +106,11 @@ function App() {
                   imgPath={item.imgPath} 
                   userGivenRating={item.userGivenRating}
                   changeRating={(value:number)=>changeRating(item.id,value)}
+                  onDelete={(item)=>{deleteItem(item)}}
                   ></Filmitem>)}
+      </div>
+      <div className='fixed-next-button'>
+            <></>
       </div>
     </div>
   );
