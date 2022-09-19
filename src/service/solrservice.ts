@@ -1,21 +1,16 @@
-function suchFilmeZuVolltext(suchString:string){
-
+function suchFilmeZuVolltext(suchString:string,cb:((respnse:any)=>void)){
+    suchString = suchString.toLowerCase();
     suchString = suchString.split(" ").length > 1?'"'+suchString+'"~2':"*"+suchString+"*";
-
-    fetch("https://solrrecommendersystem.cf:8984/solr/filme/select?debugQuery=false&indent=true&q.op=OR&q=volltextName%3A"+suchString+"",
-        {
-            method: "GET",
-            mode:'cors', 
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response=>response.json())
-        .then((responsejson)=>
-            mapping(responsejson)
-            )
-        .catch(error=>{throw new Error(error)})
-        
+    const http = new XMLHttpRequest();
+    const url = "http://solrrecommendersystem.cf:8984/solr/filme/select?q=searchtitle%3A"+suchString+""
+    http.open("GET",url);
+    http.send();
+    
+    http.onreadystatechange=(e:Event)=>{
+      if(http.readyState == 4 && http.status == 200){
+        if(cb)cb(http.responseText)
+      }
+    }
 
         let test = 
         [

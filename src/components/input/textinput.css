@@ -7,14 +7,13 @@
 }
 
 .icon{
-    height: 1.5rem;
-    width: 1.5rem;
-    padding: 4px;
+    height: clamp(25px,1.5rem,30px);
+    aspect-ratio: 1;
     position: absolute;
     box-sizing:border-box;
     top:50%;
     left:10px;
-    transform: translateY(-80%);
+    transform: translateY(-50%);
 }
 
 .input-icon{
@@ -33,10 +32,10 @@
     padding-right:1rem;
 }
 .Big{
-    height:3rem;
+    height:clamp(40px,2.5rem,60px);
     width: 100%;
 }
 .Small{
-    height:2rem;
+    height:clamp(30px,2rem,40px);
     width: 1rem;
 }

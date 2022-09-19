@@ -3,17 +3,17 @@ import { FilmitemType } from '../../types/filmitem'
 import Dropdownitem from '../dropdownitem/dropdownitem'
 import './dropdown.css'
 
-function Dropdown(props:{items:FilmitemType[]|undefined,onItemClick:((id:number)=>void)|undefined}) {
+function Dropdown(props:{items:FilmitemType[]|undefined,onItemClick:((item:FilmitemType|undefined)=>void)|undefined}) {
   if(!props || !props.items){
     return (
       <div className='dropdown-container'>
-        <Dropdownitem item={undefined}/>
+        <Dropdownitem item={undefined} />
       </div>
     )
   }
   return (
-    <div className='dropdown-container'>
-      {props.items.map((item:FilmitemType)=><Dropdownitem item={item}/>)}
+    <div className='dropdown-container' >
+      {props.items.map((item:FilmitemType)=><Dropdownitem item={item} onChoice={props.onItemClick}/>)}
     </div>
   )
 }

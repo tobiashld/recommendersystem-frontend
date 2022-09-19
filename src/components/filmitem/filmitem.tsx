@@ -35,7 +35,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
             </div>
             <div className='flex-eins relative'>
               <div className={'row flex bewertung'}>
-                <TextInput pattern="/^[0-9]+$/" placeholder={props.userGivenRating.toString()} size='Small'/>
+                <TextInput pattern={"[0-9]"} placeholder={props.userGivenRating.toString()} size='Small'/>
                  <p className=''>
                   /5
                   </p> 
