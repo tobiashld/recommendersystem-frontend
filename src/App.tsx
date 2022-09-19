@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import Filmitem from './components/filmitem/filmitem';
-import logo from './logo.svg';
+import { GrFormNextLink } from "react-icons/gr";
 import './App.css';
 import { FilmitemInterface, FilmitemType } from './types/filmitem';
 import TextInput from './components/input/textinput';
@@ -15,6 +15,7 @@ function App() {
   const [dropdownContent, setDropdownContent] = useState<FilmitemInterface[]>([]);
   const [reload,setReload] = useState(false)
   const [filmList, setFilmList] = useState<FilmitemType[]>([])
+  const [isHoveringOverNext,setIsHoveringOverNext] = useState(false)
 
   let searchAction = (event : React.KeyboardEvent<HTMLInputElement>) => {
     
@@ -73,9 +74,10 @@ function App() {
   let deleteItem = (item:FilmitemType|undefined)=>{
     if(item){
       let index = filmList.findIndex(filmitem=>filmitem.id === item.id)
+      console.log(index)
       if(index !== -1){
         let helperArr = filmList;
-        helperArr.splice(index)
+        helperArr.splice(index,1)
         setFilmList(helperArr)
       }
       setReload(!reload)
@@ -109,8 +111,9 @@ function App() {
                   onDelete={(item)=>{deleteItem(item)}}
                   ></Filmitem>)}
       </div>
-      <div className='fixed-next-button'>
-            <></>
+      <div className='fixed-next-button' onMouseOver={()=>setIsHoveringOverNext(true)} onMouseOut={()=>setIsHoveringOverNext(false)}>
+            {isHoveringOverNext?<h6 className='fixed-next-button-text'>Recommendation</h6>:<></>}
+            <GrFormNextLink className='fixed-next-button-icon'/>
       </div>
     </div>
   );

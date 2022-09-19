@@ -2,12 +2,12 @@ function suchFilmeZuVolltext(suchString:string,cb:((respnse:any)=>void)){
     suchString = suchString.toLowerCase();
     suchString = suchString.split(" ").length > 1?'"'+suchString+'"~2':"*"+suchString+"*";
     const http = new XMLHttpRequest();
-    const url = "http://solrrecommendersystem.cf:8984/solr/filme/select?q=searchtitle%3A"+suchString+""
+    const url = "http://solrrecommendersystem.cf:8984/solr/filme/select?q=searchtitle%3A"+suchString+"&q.op=OR&rows=3"
     http.open("GET",url);
     http.send();
     
     http.onreadystatechange=(e:Event)=>{
-      if(http.readyState == 4 && http.status == 200){
+      if(http.readyState === 4 && http.status === 200){
         if(cb)cb(http.responseText)
       }
     }
@@ -36,12 +36,10 @@ function suchFilmeZuVolltext(suchString:string,cb:((respnse:any)=>void)){
 
     }
 
-function mapping(responseJson:any){
-  console.log(responseJson)
-}
 
 
 
-export default {
+
+export default  {
     suchFilmeZuVolltext
 }
