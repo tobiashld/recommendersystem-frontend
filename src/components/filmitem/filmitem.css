@@ -1,15 +1,37 @@
 .filmitem-container{
+    overflow:hidden;
     height:auto;
     width: 80%;
     border-radius:15px;
-    box-shadow:0px 0px 24px 2px rgba(0,0,0,0.15);
-    background-color: rgb(228, 228, 228);
+    box-shadow:0px 0px 24px 2px rgba(0,0,0,0.25);
+    background-color: rgb(244, 244, 244);
+    border:1px solid rgb(225, 225, 225);
     padding:10px;
+    margin-top: 15px;
+    margin-bottom:15px;
     display: flex;
     justify-content: center;
 }
 .text{
     max-height:150px;
+}
+.bewertung{
+    position:absolute;
+    transform:translateY(-20%);
+    right:0;
+    top:0;
+}
+.delete{
+    transform: translateY(20%);
+    margin-left:5px;
+    margin-right:5px;
+}
+.delete:hover{
+    color:red; 
+    
+}
+.relative{
+    position:relative;
 }
 .picture{
     max-height:120px;
@@ -32,7 +54,7 @@
 
 .gradient>p{
     margin:0;
-    background:linear-gradient(to bottom,black,rgba(0, 0, 0, 0.591) 65%, transparent 100%);
+    background:linear-gradient(to bottom,black,rgba(0, 0, 0, 0.591) 2rem, transparent 100%);
     background-clip: text;
     color: transparent;
 }
