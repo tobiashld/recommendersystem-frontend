@@ -48,6 +48,7 @@ function App() {
   }
 
   let changeRating = (id:string, value:number) => {
+    console.log(value)
     let x : FilmitemType[]= [...filmList];
     let index : number = x.findIndex((film)=>film.id === id)
     if(index === -1){
@@ -56,6 +57,7 @@ function App() {
     }
     x[index].userGivenRating = value;
     setFilmList(x);
+    console.log(filmList)
     return;
   }
 
@@ -74,7 +76,6 @@ function App() {
   let deleteItem = (item:FilmitemType|undefined)=>{
     if(item){
       let index = filmList.findIndex(filmitem=>filmitem.id === item.id)
-      console.log(index)
       if(index !== -1){
         let helperArr = filmList;
         helperArr.splice(index,1)
