@@ -35,6 +35,8 @@
 
 
 .input{
+    background-color: rgb(232, 232, 232);
+    border:none;
     z-index:10;
     border-radius: 7px;
     text-decoration: none;

@@ -44,6 +44,7 @@ function TextInput(props:params) {
               pattern={props.pattern?props.pattern:undefined}   
               onBlur={(event)=>{if(props.onBlur){
                 setFocus(false)
+                // event.currentTarget.value = ""
                 // props.onBlur(event)
               }}}
               >{props.children}</input>
