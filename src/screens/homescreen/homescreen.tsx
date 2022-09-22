@@ -6,11 +6,14 @@ import Filmitem from '../../components/filmitem/filmitem';
 import TextInput from '../../components/input/textinput';
 import RecommendationModal from '../../components/modal/modal';
 import solrservice from '../../service/solrservice';
+import { addError, clearError } from '../../store/error/slice';
+import { useAppDispatch } from '../../store/error/store';
 import { DBResponse } from '../../types/dbresponse';
 import { FilmitemInterface, FilmitemType } from '../../types/filmitem';
 import './homescreen.css'
 
 function Homescreen() {
+  const dispatch = useAppDispatch()
   const [dropdown, setDropdown] = useState(false);
   const [dropdownContent, setDropdownContent] = useState<FilmitemInterface[]>([]);
   const [reload,setReload] = useState(false)
@@ -50,6 +53,7 @@ function Homescreen() {
   }
 
   let changeRating = (id:string, value:number) => {
+    dispatch(clearError({id:0}))
     console.log(value)
     let x : FilmitemType[]= [...filmList];
     let index : number = x.findIndex((film)=>film.id === id)
@@ -76,9 +80,22 @@ function Homescreen() {
   }
 
   let handleRecommendation = ()=>{
-    //request und scheiß
-    setRecommendationFilmList(solrservice.getFakeFilmArray())
-    setRecommendationReady(true);
+    if(filmList.length <= 0){
+      dispatch(addError({
+        type:"error",
+        title:"Zu wenig Filme",
+        message:"Du musst mindestens einen Film hinzugefügt haben",
+        handleClose:(id:number)=>dispatch(clearError({id:id}))
+      }))
+    }else{
+      //request und scheiß
+      let recFilmlist = solrservice.getFakeFilmArray()
+      if(recFilmlist.length > 6){
+        recFilmlist = recFilmlist.slice(0,6)
+      }
+      setRecommendationFilmList(recFilmlist)
+      setRecommendationReady(true);
+    }
   }
 
   let deleteItem = (item:FilmitemType|undefined)=>{
