@@ -7,6 +7,7 @@ type params = {
     onKeyDown?: ((event:React.KeyboardEvent<HTMLInputElement>)=>void),
     onKeyUp?: ((event:React.KeyboardEvent<HTMLInputElement>)=>void),
     onBlur?: (()=>void)
+    regexValidator?:string,
     style?: string,
     pattern?: string,
     onFocusPointOut?: boolean,
@@ -18,6 +19,7 @@ type params = {
 
 function TextInput(props:params) {
   const [focus,setFocus] = useState(false)
+  const [value, setValue] = useState("")
 
   if(!props){
     return (<div className='container'><input className='Big input'/></div>)
@@ -34,11 +36,33 @@ function TextInput(props:params) {
           {props.icon?<div className="icon">{props.icon}</div>:<></>}
           <input 
               type="text"
+              value={value}
               className={classNames}
               onClick={(event)=>{if(props.onClick)props.onClick(event)}}
-              onChange={(event)=>{if(props.onChange)props.onChange(event)}}
-              onKeyDown={(event)=>{if(props.onKeyDown)props.onKeyDown(event)}}
-              onKeyUp={(event)=>{if(props.onKeyUp)props.onKeyUp(event)}}
+              onChange={(event)=>{
+                if(props.regexValidator){
+                  if(event.currentTarget.value.match(props.regexValidator))setValue(event.currentTarget.value)
+                }else{
+                  setValue(event.currentTarget.value)
+                }
+                if(props.onChange)props.onChange(event)
+              }}
+              onKeyDown={(event)=>{
+                if(props.regexValidator){
+                  if(event.currentTarget.value.match(props.regexValidator))setValue(event.currentTarget.value)
+                }else{
+                  setValue(event.currentTarget.value)
+                }
+                if(props.onKeyDown)props.onKeyDown(event)
+              }}
+              onKeyUp={(event)=>{
+                if(props.regexValidator){
+                  if(event.currentTarget.value.match(props.regexValidator))setValue(event.currentTarget.value)
+                }else{
+                  setValue(event.currentTarget.value)
+                }
+                if(props.onKeyUp)props.onKeyUp(event)
+              }}
               placeholder={props.placeholder?props.placeholder:undefined}   
               onFocus={()=>{setFocus(true)}}  
               pattern={props.pattern?props.pattern:undefined}   
