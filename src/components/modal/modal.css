@@ -35,6 +35,7 @@
     cursor: pointer;
 }
 .modal-filmlist{
+    place-items: center;
     justify-content: center;
     width: 90%;
     display:grid;
