@@ -4,21 +4,24 @@ const serviceFunctions = {
 } 
 
 function suchFilmeZuVolltext(suchString:string,cb:((respnse:any)=>void)){
-    suchString = suchString.toLowerCase();
-    //suchString = suchString.split(" ").length > 1?'"'+suchString+'"~2':"*"+suchString+"*";
-    let endsuchstring = ""
-    for(let word of suchString.split(" ")){
-      endsuchstring += "*"+word+"*";
-    }
+    // suchString = suchString.toLowerCase();
+    // //suchString = suchString.split(" ").length > 1?'"'+suchString+'"~2':"*"+suchString+"*";
+    // let endsuchstring = ""
+    // for(let word of suchString.split(" ")){
+    //   endsuchstring += "*"+word+"*";
+    // }
     
     const http = new XMLHttpRequest();
-    const url = "http://solrrecommendersystem.cf:8984/solr/filme/select?q=searchtitle%3A"+endsuchstring+"&q.op=OR&rows=3"
+
+    //const url = "http://solrrecommendersystem.cf:8984/solr/filme/select?q=searchtitle%3A"+endsuchstring+"&q.op=OR&rows=3"
+    const url = "https://backend-recommendersystem.herokuapp.com/dropdownsearch?searchtitle="+suchString.split(" ").join("+")
     http.open("GET",url);
     http.send();
     
     http.onreadystatechange=(e:Event)=>{
       if(http.readyState === 4 && http.status === 200){
-        if(cb)cb(http.responseText)
+        console.log(http)
+        if(cb)cb(JSON.parse(http.responseText))
       }
     }
 
