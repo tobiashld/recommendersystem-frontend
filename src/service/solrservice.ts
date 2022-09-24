@@ -15,13 +15,14 @@ function suchFilmeZuVolltext(suchString:string,cb:((respnse:any)=>void)){
 
     //const url = "http://solrrecommendersystem.cf:8984/solr/filme/select?q=searchtitle%3A"+endsuchstring+"&q.op=OR&rows=3"
     const url = "https://backend-recommendersystem.herokuapp.com/dropdownsearch?searchtitle="+suchString.split(" ").join("+")
+    //const url = "http://localhost:5000/dropdownsearch?searchtitle="+suchString.split(" ").join("+")
     http.open("GET",url);
     http.send();
     
     http.onreadystatechange=(e:Event)=>{
       if(http.readyState === 4 && http.status === 200){
         console.log(http)
-        if(cb)cb(JSON.parse(http.responseText))
+        if(cb)cb(JSON.parse(JSON.stringify(http.responseText)))
       }
     }
 
