@@ -1,9 +1,9 @@
 import React, { Ref } from 'react'
-import { FilmitemType } from '../../types/filmitem'
+import { FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
 import Dropdownitem from '../dropdownitem/dropdownitem'
 import './dropdown.css'
 
-function Dropdown(props:{items:FilmitemType[]|undefined,onItemClick:((item:FilmitemType|undefined)=>void)|undefined}) {
+function Dropdown(props:{items:FilmitemTypeBewertet[]|undefined,onItemClick:((item:FilmitemTypeBewertet|undefined)=>void)|undefined}) {
   if(!props || !props.items){
     return (
       <div className='dropdown-container'>
@@ -13,7 +13,7 @@ function Dropdown(props:{items:FilmitemType[]|undefined,onItemClick:((item:Filmi
   }
   return (
     <div className='dropdown-container' >
-      {props.items.map((item:FilmitemType)=><Dropdownitem item={item} onChoice={props.onItemClick}/>)}
+      {props.items.map((item:FilmitemTypeBewertet,index)=><Dropdownitem key={index} item={item} onChoice={props.onItemClick}/>)}
     </div>
   )
 }

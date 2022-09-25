@@ -5,21 +5,21 @@ import Dropdown from '../../components/dropdown/dropdown';
 import Filmitem from '../../components/filmitem/filmitem';
 import TextInput from '../../components/input/textinput';
 import RecommendationModal from '../../components/modal/modal';
-import solrservice from '../../service/solrservice';
+import solrservice from '../../service/backendconnection';
 import { addError, clearError } from '../../store/error/slice';
 import { useAppDispatch } from '../../store/error/store';
 import { DBResponse } from '../../types/dbresponse';
-import { FilmitemInterface, FilmitemType } from '../../types/filmitem';
+import { FilmitemInterfaceBewertet, FilmitemType, FilmitemTypeBewertet, RecommendFilmItem } from '../../types/filmitem';
 import './homescreen.css'
 
 function Homescreen() {
   const dispatch = useAppDispatch()
   const [dropdown, setDropdown] = useState(false);
-  const [dropdownContent, setDropdownContent] = useState<FilmitemInterface[]>([]);
+  const [dropdownContent, setDropdownContent] = useState<FilmitemInterfaceBewertet[]>([]);
   const [reload,setReload] = useState(false)
   const [recommendationReady,setRecommendationReady] = useState(false);
-  const [filmList, setFilmList] = useState<FilmitemType[]>([])
-  const [recommendationfilmList, setRecommendationFilmList] = useState<FilmitemType[]>([])
+  const [filmList, setFilmList] = useState<FilmitemTypeBewertet[]>([])
+  const [recommendationfilmList, setRecommendationFilmList] = useState<RecommendFilmItem[]|undefined>([])
   const [isHoveringOverNext,setIsHoveringOverNext] = useState(false)
 
   let searchAction = (event : React.KeyboardEvent<HTMLInputElement>) => {
@@ -40,12 +40,8 @@ function Homescreen() {
     let requestJson : DBResponse = JSON.parse(request)
     if(requestJson && requestJson.response){
       let options = requestJson.response.docs.length > 3?requestJson.response.docs.slice(0,3):requestJson.response.docs;
-      let optionsTyped = options.map(item=>{return{
-        id:item.id,
-        title: item.volltextName, 
-        beschreibung: item.beschreibung, 
-        imgPath:item.picture, 
-        releaseJahr:item.releaseJahr,
+      let optionsTyped :FilmitemTypeBewertet[] = options.map(item=>{return{
+        ...item,
         userGivenRating:1,
       }})
       setDropdownContent(optionsTyped)
@@ -54,20 +50,17 @@ function Homescreen() {
 
   let changeRating = (id:string, value:number) => {
     dispatch(clearError({id:0}))
-    console.log(value)
-    let x : FilmitemType[]= [...filmList];
+    let x : FilmitemTypeBewertet[]= [...filmList];
     let index : number = x.findIndex((film)=>film.id === id)
     if(index === -1){
-      console.log("Den zu bewertenden Film gibt es nicht in der Filmliste!");
       return;
     }
     x[index].userGivenRating = value === 0?1:value;
     setFilmList(x);
-    console.log(filmList)
     return;
   }
 
-  let handleDropdownClick = (item:FilmitemType|undefined)=>{
+  let handleDropdownClick = (item:FilmitemTypeBewertet|undefined)=>{
     if(item){
       if(!filmList.find(filmitem=>filmitem.id === item.id)){
         let helperArr = filmList;
@@ -89,12 +82,16 @@ function Homescreen() {
       }))
     }else{
       //request und scheiß
-      let recFilmlist = solrservice.getFakeFilmArray()
-      if(recFilmlist.length > 6){
-        recFilmlist = recFilmlist.slice(0,6)
-      }
-      setRecommendationFilmList(recFilmlist)
+      
+      //let recFilmlist = solrservice.getFakeFilmArray()
+      // if(recFilmlist.length > 6){
+      //   recFilmlist = recFilmlist.slice(0,6)
+      // }
       setRecommendationReady(true);
+      solrservice.getRecommendationsForFilms(filmList,(response)=>{
+        console.log(response)
+        setRecommendationFilmList(response);
+        })
     }
   }
 
@@ -113,7 +110,7 @@ function Homescreen() {
 
   return (
     <>
-      {recommendationReady?<RecommendationModal items={recommendationfilmList} onClose={()=>setRecommendationReady(false)}/>:<></>}
+      {recommendationReady?<RecommendationModal items={recommendationfilmList} onClose={()=>{setRecommendationReady(false);setRecommendationFilmList(undefined)}}/>:<></>}
       <div className="App">
         
         <div className="login-box">
@@ -129,13 +126,16 @@ function Homescreen() {
               <div className="divider"></div>
             </div>
             <h5>Zum Benutzerprofil hinzugefügte Filme</h5>
-            {filmList.map(item=>
+            {filmList.map((item,index)=>
                 <Filmitem 
+                    key={index}
                     id={item.id}
-                    title={item.title} 
+                    netflixid={item.id}
+                    searchtitle={item.searchtitle}
+                    volltextName={item.volltextName} 
                     beschreibung={item.beschreibung} 
                     releaseJahr={item.releaseJahr} 
-                    imgPath={item.imgPath} 
+                    picture={item.picture} 
                     userGivenRating={item.userGivenRating}
                     changeRating={(value:number)=>changeRating(item.id,value)}
                     onDelete={(item)=>{deleteItem(item)}}

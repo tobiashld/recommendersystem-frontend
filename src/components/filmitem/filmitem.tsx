@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import { FilmitemType } from '../../types/filmitem'
+import { FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
 import TextInput from '../input/textinput'
 import { AiFillDelete } from 'react-icons/ai'
 import './filmitem.css'
 
-interface FilmitemTypeErweitert extends FilmitemType {
+interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
   changeRating:((value:number)=>void),
-  onDelete:((item:FilmitemType)=>void)
+  onDelete:((item:FilmitemTypeBewertet)=>void)
 }
 
 
 function Filmitem(props:FilmitemTypeErweitert) {
-  if(!props || !props.title || !props.beschreibung || !props.imgPath){
+  if(!props || !props.volltextName || !props.beschreibung || !props.picture){
     console.log('filmitem props überprüfen!')
 
     throw new Error("filmitem props überprüfen!")
@@ -22,28 +22,28 @@ function Filmitem(props:FilmitemTypeErweitert) {
   if(props.beschreibung.split(" ").length >= 45){
     bereinigteBeschreibung = props.beschreibung.split(" ").slice(0,45).join(" ")+ " ";
   }
-  const fullImgPath = "https://image.tmdb.org/t/p/w92"+props.imgPath;
+  const fullImgPath = "https://image.tmdb.org/t/p/w92"+props.picture;
 
   return (
     <div className="filmitem-container">
       <div className={'big row flex'}>
         <div className={'flex-eins picture'} >
-            <img src={fullImgPath} alt={props.title+" bild"}/>
+            <img src={fullImgPath} alt={props.volltextName+" bild"}/>
         </div>
         <div className={"flex-fuenf column text"}>
           <div className={"full-width title top-line"}>
             <div className='flex-vier'>
-              {props.title}
+              {props.volltextName}
               <AiFillDelete className='delete' onClick={()=>{props.onDelete(props)}}/>
             </div>
-            <div className='flex-eins relative'>
+            {/* <div className='flex-eins relative'>
               <div className={'row flex bewertung'}>
                 <TextInput regexValidator='^$|(?<!\S)[1-5](?!\S)' placeholder={props.userGivenRating.toString()} onKeyUp={(e)=>{if(props.changeRating)props.changeRating(Number(e.currentTarget.value))}} size='Small'/>
                  <h3 className=''>
                   /5
                   </h3> 
               </div>
-            </div>
+            </div> */}
           </div>
           <div className={"full-width description"}>
             {props.releaseJahr}

@@ -1,5 +1,5 @@
 .bigfilmitem-box{
-    border-radius: 18px;
+    border-radius: 14%;
     height:fit-content;
     width:fit-content;
     overflow:hidden;
@@ -17,6 +17,7 @@
     background-color: rgba(238, 238, 238, 0.757);
     z-index: 200;
     display: flex;
+    font-size:.7vw;
     flex-direction: column;
     align-items: center;
     justify-content: center;

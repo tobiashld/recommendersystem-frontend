@@ -1,9 +1,14 @@
+import Filmitem from "../components/filmitem/filmitem";
+import RecommendationModal from "../components/modal/modal";
+import { FilmitemType, RecommendFilmItem } from "../types/filmitem";
+
 const serviceFunctions = {
   suchFilmeZuVolltext,
-  getFakeFilmArray
+  getFakeFilmArray,
+  getRecommendationsForFilms
 } 
 
-function suchFilmeZuVolltext(suchString:string,cb:((respnse:any)=>void)){
+function suchFilmeZuVolltext(suchString:string,cb:((response:any)=>void)){
     // suchString = suchString.toLowerCase();
     // //suchString = suchString.split(" ").length > 1?'"'+suchString+'"~2':"*"+suchString+"*";
     // let endsuchstring = ""
@@ -21,17 +26,31 @@ function suchFilmeZuVolltext(suchString:string,cb:((respnse:any)=>void)){
     
     http.onreadystatechange=(e:Event)=>{
       if(http.readyState === 4 && http.status === 200){
-        console.log(http)
         if(cb)cb(JSON.parse(JSON.stringify(http.responseText)))
       }
     }
 
-        
-          return Promise.resolve((result:any)=>test)
+
+      
 
     }
 
+function getRecommendationsForFilms(filme:FilmitemType[],cb:((response:RecommendFilmItem[])=>void)){
+  const http = new XMLHttpRequest();
 
+    
+    const url = "https://backend-recommendersystem.herokuapp.com/get/Sammlung?ids="+filme.map((value:FilmitemType)=>value.id).join("+")
+
+    http.open("GET",url);
+    http.send();
+    
+    http.onreadystatechange=(e:Event)=>{
+      if(http.readyState === 4 && http.status === 200){
+        let test : {result:RecommendFilmItem[]} = JSON.parse(http.responseText)
+        if(cb)cb(test.result)
+      }
+    }
+}
 
 function getFakeFilmArray(){
   
