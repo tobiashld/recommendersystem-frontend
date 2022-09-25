@@ -19,12 +19,17 @@ function ErrorComponent(props:{errorListe:ErrorList}) {
             {props.errorListe.map((error:Error)=>{
                 return(
                 <div className={error.type + ' error-box'}>
+                    
                     <div className='error-box-title'>
                         {error.title}
                     </div>
                     <p>
                         {error.message}
                     </p>
+                    <div className='loading-bar-container'>
+                        <div className="loading-bar-content">
+                        </div>
+                    </div>
                 </div>
             ) })}
         </div>

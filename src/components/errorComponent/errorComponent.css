@@ -37,3 +37,27 @@
 .log{
     background-color: grey;
 }
+.loading-bar-content{
+    background-color: rgb(245, 241, 241);
+    content:"";
+    height:100%;
+    width: 100%;
+    animation: errorloadinganimation 5s linear;
+}
+
+.loading-bar-container{
+    height:5px;
+    width: auto;
+    margin:5px 5px 0 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+@keyframes errorloadinganimation {
+    0%{
+        transform:translateX(-100%)
+    }
+    100%{
+
+    }
+}
