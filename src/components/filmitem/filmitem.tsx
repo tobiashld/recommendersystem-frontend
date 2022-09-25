@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
 import TextInput from '../input/textinput'
 import { AiFillDelete } from 'react-icons/ai'
+import { BiChevronDown,BiChevronUp } from 'react-icons/bi'
 import './filmitem.css'
 
 interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
@@ -11,12 +12,16 @@ interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
 
 
 function Filmitem(props:FilmitemTypeErweitert) {
+  const [isExpanded,setIsExpanded] = useState(false)
+
   if(!props || !props.volltextName || !props.beschreibung || !props.picture){
     console.log('filmitem props überprüfen!')
 
     throw new Error("filmitem props überprüfen!")
   }
-    
+  let beschreibungClasses = "full-width description ".concat(isExpanded?"filmitem-desc-full":"gradient")
+  let beschreibungBoxClasses = "flex-fuenf column text ".concat(isExpanded?"":"filmitem-container-relative")
+  let chevronClasses = "filmitem-chevron ".concat(isExpanded?"":"fimitem-chevron-absolute")
   let bereinigteBeschreibung = new String(props.beschreibung)
 
   if(props.beschreibung.split(" ").length >= 45){
@@ -30,7 +35,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
         <div className={'flex-eins picture'} >
             <img src={fullImgPath} alt={props.volltextName+" bild"}/>
         </div>
-        <div className={"flex-fuenf column text"}>
+        <div className={beschreibungBoxClasses}>
           <div className={"full-width title top-line"}>
             <div className='flex-vier'>
               {props.volltextName}
@@ -48,10 +53,16 @@ function Filmitem(props:FilmitemTypeErweitert) {
           <div className={"full-width description"}>
             {props.releaseJahr}
           </div>
-          <div className={"full-width description gradient"}>
+          <div className={beschreibungClasses}>
             <p>  
-              {bereinigteBeschreibung}
+              {isExpanded?props.beschreibung:bereinigteBeschreibung}
             </p>
+          </div>
+          <div className={chevronClasses} onClick={()=>setIsExpanded(!isExpanded)}>
+            {
+              isExpanded?<BiChevronUp />:<BiChevronDown />
+            }
+            
           </div>
         </div>
       </div>
