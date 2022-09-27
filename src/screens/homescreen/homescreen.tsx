@@ -49,7 +49,7 @@ function Homescreen() {
   }
 
   let changeRating = (id:string, value:number) => {
-    dispatch(clearError({id:0}))
+    //dispatch(clearError({id:0}))
     let x : FilmitemTypeBewertet[]= [...filmList];
     let index : number = x.findIndex((film)=>film.id === id)
     if(index === -1){

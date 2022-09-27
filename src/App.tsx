@@ -4,15 +4,36 @@ import ErrorComponent from './components/errorComponent/errorComponent';
 import Homescreen from './screens/homescreen/homescreen';
 import { addError, errorSlice } from './store/error/slice';
 import { RootState, store, useAppDispatch } from './store/error/store';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import serviceFunctions from './service/backendconnection';
+import BackendNotReachable from './screens/backendnotreachable/backendnotreachable';
+
 
 function App() {
   const errorliste = useSelector((state:RootState)=>state.errorListe)
+  const [backendOnline,setBackendOnline] = useState(false)
+  useEffect(()=>{
+    if(!backendOnline){
+      console.log("begin")
+      serviceFunctions.suchFilmeZuVolltext("test",(response:any)=>{
+        console.log("end")
+        setBackendOnline(true)
+      })
+    }
+  })
+  
   
   return (
   <>
-    <Homescreen />
-    <ErrorComponent errorListe={errorliste}/>
+    {backendOnline?
+      <>
+        <Homescreen />
+        <ErrorComponent errorListe={errorliste}/>
+      </>
+      :
+      <BackendNotReachable />
+    }
+    
   </>)
 }
 
