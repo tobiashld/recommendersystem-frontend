@@ -2,6 +2,7 @@ import React from 'react'
 import { FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
 import Loadingspinner from '../loadingspinner/loadingspinner'
 import './dropdownitem.css'
+import filmpicnotfoundsvg from './filmpicnotfound.svg'
 function Dropdownitem(props:{item:FilmitemTypeBewertet|undefined,onChoice?:((item:FilmitemTypeBewertet|undefined)=>void)},) {
     if(!props || !props.item){
         return (<div className='item-wrapper loading-container'><Loadingspinner size='Medium'/></div>)
@@ -16,7 +17,7 @@ function Dropdownitem(props:{item:FilmitemTypeBewertet|undefined,onChoice?:((ite
         }
     }}>
         <div className='picture'>
-            <img src={fullImgPath} alt={props.item.volltextName}/>
+            <img src={props.item.picture=== "undefined"?filmpicnotfoundsvg:fullImgPath} alt={props.item.volltextName}/>
         </div>
         <div className='flex column dropdown-item-text'>
             <h5>{props.item.volltextName}</h5>

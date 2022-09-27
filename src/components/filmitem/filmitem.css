@@ -74,6 +74,9 @@
     position:absolute;
     bottom:-10px;
 }
+.filmpic{
+    font-size:8px;
+}
 .filmitem-container-relative{
     position:relative
 }

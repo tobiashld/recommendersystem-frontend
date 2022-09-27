@@ -4,6 +4,7 @@ import TextInput from '../input/textinput'
 import { AiFillDelete } from 'react-icons/ai'
 import { BiChevronDown,BiChevronUp } from 'react-icons/bi'
 import './filmitem.css'
+import filmnotfoundsvg from './filmpicnotfound.svg'
 
 interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
   changeRating:((value:number)=>void),
@@ -23,17 +24,19 @@ function Filmitem(props:FilmitemTypeErweitert) {
   let beschreibungBoxClasses = "flex-fuenf column text ".concat(isExpanded?"":"filmitem-container-relative")
   let chevronClasses = "filmitem-chevron ".concat(isExpanded?"":"fimitem-chevron-absolute")
   let bereinigteBeschreibung = new String(props.beschreibung)
-
+  let unbereinigteBeschreibung = new String(props.beschreibung)
   if(props.beschreibung.split(" ").length >= 45){
     bereinigteBeschreibung = props.beschreibung.split(" ").slice(0,45).join(" ")+ " ";
+  }else if(props.beschreibung.split(" ").length === 1){
+    bereinigteBeschreibung = "Es liegt keine Beschreibung vor!"
+    unbereinigteBeschreibung = "Es liegt keine Beschreibung vor!"
   }
   const fullImgPath = "https://image.tmdb.org/t/p/w92"+props.picture;
-
   return (
     <div className="filmitem-container">
       <div className={'big row flex'}>
-        <div className={'flex-eins picture'} >
-            <img src={fullImgPath} alt={props.volltextName+" bild"}/>
+        <div className={'flex-eins picture filmpic'} >
+            <img src={(!props.picture || props.picture === "undefined")?filmnotfoundsvg:fullImgPath} alt={props.volltextName+" bild"}/>
         </div>
         <div className={beschreibungBoxClasses}>
           <div className={"full-width title top-line"}>
@@ -55,15 +58,19 @@ function Filmitem(props:FilmitemTypeErweitert) {
           </div>
           <div className={beschreibungClasses}>
             <p>  
-              {isExpanded?props.beschreibung:bereinigteBeschreibung}
+              {isExpanded?unbereinigteBeschreibung:bereinigteBeschreibung}
             </p>
           </div>
-          <div className={chevronClasses} onClick={()=>setIsExpanded(!isExpanded)}>
+          {
+            props.beschreibung === "undefined"?<></>:
+            <div className={chevronClasses} onClick={()=>setIsExpanded(!isExpanded)}>
             {
               isExpanded?<BiChevronUp />:<BiChevronDown />
             }
             
           </div>
+          }
+          
         </div>
       </div>
     </div>
