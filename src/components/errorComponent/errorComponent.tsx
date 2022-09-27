@@ -15,10 +15,10 @@ function ErrorComponent(props:{errorListe:ErrorList}) {
 
   return (
     <ErrorPortal wrapperId="react-portal-modal-container">
-        <div className='error-wrapper'>
+        <div className='error-wrapper '>
             {props.errorListe.map((error:Error)=>{
                 return(
-                <div className={error.type + ' error-box'}>
+                <div className={error.type + ' error-box show-vertical'}>
                     
                     <div className='error-box-title'>
                         {error.title}

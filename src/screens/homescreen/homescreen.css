@@ -8,7 +8,55 @@
     font-size: calc(10px + 2vmin);
     color: black;
     background-color: rgba(247, 247, 247, 0.933);
+    
   }
+  .show-vertical{
+    opacity: 1;
+    animation:slideInVertical 1s ease-in-out;
+    transition:all 1s;
+  }
+  .show-horizontal{
+    opacity: 1;
+    animation:slideInHorizontal 1s ease-in-out;
+    transition:all 1s;
+  }
+  .show-horizontal-up{
+    opacity: 1;
+    animation:slideInHorizontalup 1s ease-in-out;
+  }
+  
+
+  @keyframes slideInVertical {
+    0%{
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    100%{
+      opacity: 1;
+      transform: translateX(0%);
+    }
+  }
+  @keyframes slideInHorizontal {
+    0%{
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100%{
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+  @keyframes slideInHorizontalup {
+    0%{
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    100%{
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+  
   .fixed-next-button{
     position: fixed;
     bottom:30px;

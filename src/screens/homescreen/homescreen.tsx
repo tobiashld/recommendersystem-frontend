@@ -111,9 +111,9 @@ function Homescreen() {
   return (
     <>
       {recommendationReady?<RecommendationModal items={recommendationfilmList} onClose={()=>{setRecommendationReady(false);setRecommendationFilmList(undefined)}}/>:<></>}
-      <div className="App">
+      <div className={"App"}>
         
-        <div className="login-box">
+        <div className={"login-box show-vertical"}>
           
             <h3>Recommendersystem</h3>
             <div className='searchbox'>
@@ -141,7 +141,7 @@ function Homescreen() {
                     onDelete={(item)=>{deleteItem(item)}}
                     ></Filmitem>)}
         </div>
-        <div className='fixed-next-button' onClick={()=>{handleRecommendation()}} onMouseOver={()=>setIsHoveringOverNext(true)} onMouseOut={()=>setIsHoveringOverNext(false)}>
+        <div className={'fixed-next-button show-vertical delay1'} onClick={()=>{handleRecommendation()}} onMouseOver={()=>setIsHoveringOverNext(true)} onMouseOut={()=>setIsHoveringOverNext(false)}>
               {isHoveringOverNext?<h6 className='fixed-next-button-text'>Recommendation</h6>:<></>}
               <GrFormNextLink className='fixed-next-button-icon'/>
         </div>

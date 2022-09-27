@@ -6,7 +6,7 @@ import './dropdown.css'
 function Dropdown(props:{items:FilmitemTypeBewertet[]|undefined,onItemClick:((item:FilmitemTypeBewertet|undefined)=>void)|undefined}) {
   if(!props || !props.items){
     return (
-      <div className='dropdown-container'>
+      <div className='dropdown-container show'>
         <Dropdownitem item={undefined} />
       </div>
     )
