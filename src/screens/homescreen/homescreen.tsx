@@ -124,15 +124,19 @@ function Homescreen() {
     <>
       {recommendationReady?<RecommendationModal itemsGesamt={recommendationFlag?recommendationfilmGesamtList:undefined} itemsEinzelnd={!recommendationFlag?recommendationfilmEinzelndList:undefined} recommendationFlag={recommendationFlag} onClose={()=>{setRecommendationReady(false);setRecommendationFilmEinzelndList(undefined);setRecommendationFilmGesamtList(undefined)}}/>:<></>}
       <div className={"App"}>
-        
+        <div className="toggle-pill">
+            <div>
+                  <FiAlignJustify style={{color:!recommendationFlag?'black':'lightgray'}} title='Einzelne Empfehlungen'/>
+            </div>
+            <Switch color="default" onChange={(event,checked)=>setRecommendationFlag(checked)} defaultChecked/>
+            <div>
+              <FiMinus style={{color:recommendationFlag?'black':'lightgray'}} title='Gesammte Empfehlung'/>
+            </div>
+        </div>
         <div className={"login-box show-vertical"}>
             <div className='header'>
               <h3>Recommendersystem</h3>
-              <div className='toggle-box'>
-                <FiAlignJustify style={{color:!recommendationFlag?'black':'lightgray'}} title='Einzelne Empfehlungen'/>
-                <Switch color="default" onChange={(event,checked)=>setRecommendationFlag(checked)} defaultChecked/>
-                <FiMinus style={{color:recommendationFlag?'black':'lightgray'}} title='Gesammte Empfehlung'/>
-              </div>
+              
             </div>
             <div className='searchbox'>
               <TextInput onKeyUp={(event)=>searchAction(event)} onBlur={()=>setDropdown(false)} icon={<BiSearch />} onFocusPointOut={true}/>
