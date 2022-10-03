@@ -17,8 +17,8 @@ jobs:
       - name: test
         run: node node_modules/.bin/react-scripts test
   build:
+    needs: test
     runs-on: ubuntu-latest
-    if: success()
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -29,8 +29,8 @@ jobs:
       - name: build
         run: node --max_old_space_size=2560 node_modules/.bin/react-scripts build
   deploy:
+    needs: [test, build]
     runs-on: ubuntu-latest
-    if:  success()
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
