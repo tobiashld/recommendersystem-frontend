@@ -1,8 +1,7 @@
-import React, { useRef,useState } from 'react'
+import { useRef,useState } from 'react'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
-import { GrDown, GrUp } from 'react-icons/gr'
 import Slider from 'react-slick'
-import { FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
+import { FilmitemTypeBewertet } from '../../types/filmitem'
 import Dropdownitem from '../dropdownitem/dropdownitem'
 import './dropdown.css'
 

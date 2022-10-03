@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import { FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
-import TextInput from '../input/textinput'
+import { useState } from 'react'
+import {  FilmitemTypeBewertet } from '../../types/filmitem'
 import { AiFillDelete } from 'react-icons/ai'
 import { BiChevronDown,BiChevronUp } from 'react-icons/bi'
 import './filmitem.css'
 import filmpicnotfoundnonsvg from '../dropdownitem/images.jpg'
-import filmnotfoundsvg from './filmpicnotfound.svg'
 
 interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
   changeRating:((value:number)=>void),
@@ -24,8 +22,8 @@ function Filmitem(props:FilmitemTypeErweitert) {
   let beschreibungClasses = "full-width description ".concat(isExpanded?"filmitem-desc-full":"gradient")
   let beschreibungBoxClasses = "flex-fuenf column text ".concat(isExpanded?"":"filmitem-container-relative")
   let chevronClasses = "filmitem-chevron ".concat(isExpanded?"":"fimitem-chevron-absolute")
-  let bereinigteBeschreibung = new String(props.beschreibung)
-  let unbereinigteBeschreibung = new String(props.beschreibung)
+  let bereinigteBeschreibung = props.beschreibung.toString()
+  let unbereinigteBeschreibung = props.beschreibung.toString()
   if(props.beschreibung.split(" ").length >= 45){
     bereinigteBeschreibung = props.beschreibung.split(" ").slice(0,45).join(" ")+ " ";
   }else if(props.beschreibung.split(" ").length === 1){

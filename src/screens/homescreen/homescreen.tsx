@@ -1,9 +1,8 @@
 import { Switch } from '@mui/material';
 import React, {useState} from 'react'
 import { BiSearch } from 'react-icons/bi';
-import { GrFormNextLink, GrSubtract, GrTextAlignFull } from 'react-icons/gr';
+import { GrFormNextLink,  } from 'react-icons/gr';
 import {FiAlignJustify, FiMinus} from 'react-icons/fi'
-import { IconContext } from 'react-icons';
 import Dropdown from '../../components/dropdown/dropdown';
 import Filmitem from '../../components/filmitem/filmitem';
 import TextInput from '../../components/input/textinput';

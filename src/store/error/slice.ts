@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Error, ErrorType } from '../../types/errortypes'
-import { useAppDispatch } from './store'
 
 interface InitialErrorState{
     errorListe:Error[]

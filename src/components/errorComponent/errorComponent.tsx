@@ -1,4 +1,3 @@
-import React, {useEffect} from 'react'
 import { Error, ErrorList } from '../../types/errortypes';
 import ErrorPortal from '../errorportal/errorportal';
 import './errorComponent.css'

@@ -1,5 +1,3 @@
-import Filmitem from "../components/filmitem/filmitem";
-import RecommendationModal from "../components/modal/modal";
 import { FilmitemType, RecommendFilmItem } from "../types/filmitem";
 
 const serviceFunctions = {

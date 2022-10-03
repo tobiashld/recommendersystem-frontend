@@ -1,4 +1,4 @@
-import React, { JSXElementConstructor, ReactNode, useState } from 'react'
+import React, { useState } from 'react'
 import './textinput.css'
 
 type params = {

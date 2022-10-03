@@ -34,10 +34,7 @@ function BigFilmItem(props:{
                 break;
         }
     }
-    let bereinigteBeschreibung = ""
-    if(props.item.beschreibung.split(" ").length >= 15){
-        bereinigteBeschreibung = props.item.beschreibung.split(" ").slice(0,15).join(" ")+ " ...";
-      }
+    
     const fullImgPath = "https://image.tmdb.org/t/p/w154"+props.item.picture;
   return (
     <div className='bigfilmitem-box' onMouseOver={()=>handleHover(HoverCase.MouseIn)} onMouseOut={()=>handleHover(HoverCase.MouseOut)}>
