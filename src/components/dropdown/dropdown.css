@@ -13,7 +13,11 @@
 }
 .search-arrow-up{
     position:absolute;
-    left:50%;
+    display: flex;
+    justify-content: center;
+    left:0px;
+    align-items: center;
+    width:100%;
     top:0px;
     z-index:1000;
     cursor: pointer;
@@ -21,6 +25,7 @@
 }
 .slider-box-custom{
     width:100%;
+    padding-top:5px;
     max-height:350px;
     height:auto
 }
@@ -30,8 +35,12 @@
 }
 .search-arrow-down{
     position:absolute;
+    display: flex;
     color:grey;
-    left:50%;
+    left:0px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     bottom:0px;
     z-index:1000;
     cursor: pointer;

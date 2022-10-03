@@ -30,7 +30,6 @@ function Dropdown(props:{items:FilmitemTypeBewertet[]|undefined,onItemClick:((it
       infinite:false,
       className:"slider-box-custom",
       vertical: true,
-      swipeToSlide: true,
       beforeChange:(current:any,next:any)=>setSlideIndex(next)
   }
   return (

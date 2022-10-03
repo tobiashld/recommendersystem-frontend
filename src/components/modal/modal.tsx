@@ -26,6 +26,7 @@ function RecommendationModal(props:{
         initialSlide: 0,
         nextArrow: <GrNext />,
         prevArrow: <GrPrevious />,
+        swipeToSlide: true,
         responsive: [
           {
             breakpoint: 1024,
@@ -36,21 +37,6 @@ function RecommendationModal(props:{
               dots: true
             }
           },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2,
-              initialSlide: 2
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
         ]
       };
 
@@ -63,6 +49,7 @@ function RecommendationModal(props:{
         initialSlide: 0,
         nextArrow: <GrNext />,
         prevArrow: <GrPrevious />,
+        swipeToSlide: true,
         responsive: [
           {
             breakpoint: 1024,
@@ -73,21 +60,6 @@ function RecommendationModal(props:{
               dots: true
             }
           },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2,
-              initialSlide: 2
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
         ]
       };
 
