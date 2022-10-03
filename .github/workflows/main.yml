@@ -13,11 +13,9 @@ jobs:
         with:
           node-version: 16
       - name: install dependencies
-        run: |
-          npm install
+        run: npm ci
       - name: test
-        run: |
-          react-scripts test
+        run: node node_modules/.bin/react-scripts test
   build:
     runs-on: ubuntu-latest
     if: success() && github.ref_name == 'main'
@@ -27,11 +25,9 @@ jobs:
         with:
           node-version: 16
       - name: install dependencies
-        run: |
-          npm install
+        run: npm ci
       - name: build
-        run: |
-          node --max_old_space_size=2560 node_modules/.bin/react-scripts build
+        run: node --max_old_space_size=2560 node_modules/.bin/react-scripts build
   deploy:
     runs-on: ubuntu-latest
     if: success() && github.ref_name == 'main'
