@@ -1,6 +1,9 @@
+import { Switch } from '@mui/material';
 import React, {useState} from 'react'
 import { BiSearch } from 'react-icons/bi';
-import { GrFormNextLink } from 'react-icons/gr';
+import { GrFormNextLink, GrSubtract, GrTextAlignFull } from 'react-icons/gr';
+import {FiAlignJustify, FiMinus} from 'react-icons/fi'
+import { IconContext } from 'react-icons';
 import Dropdown from '../../components/dropdown/dropdown';
 import Filmitem from '../../components/filmitem/filmitem';
 import TextInput from '../../components/input/textinput';
@@ -15,11 +18,13 @@ import './homescreen.css'
 function Homescreen() {
   const dispatch = useAppDispatch()
   const [dropdown, setDropdown] = useState(false);
+  const [recommendationFlag,setRecommendationFlag] = useState(true)
   const [dropdownContent, setDropdownContent] = useState<FilmitemInterfaceBewertet[]>([]);
   const [reload,setReload] = useState(false)
   const [recommendationReady,setRecommendationReady] = useState(false);
   const [filmList, setFilmList] = useState<FilmitemTypeBewertet[]>([])
-  const [recommendationfilmList, setRecommendationFilmList] = useState<RecommendFilmItem[]|undefined>([])
+  const [recommendationfilmEinzelndList, setRecommendationFilmEinzelndList] = useState<RecommendFilmItem[]|undefined>([])
+  const [recommendationfilmGesamtList, setRecommendationFilmGesamtList] = useState<FilmitemType[]|undefined>([])
   const [isHoveringOverNext,setIsHoveringOverNext] = useState(false)
 
   let searchAction = (event : React.KeyboardEvent<HTMLInputElement>) => {
@@ -39,7 +44,7 @@ function Homescreen() {
   let handleRequest = (request:any )=>{
     let requestJson : DBResponse = JSON.parse(request)
     if(requestJson && requestJson.response){
-      let options = requestJson.response.docs.length > 3?requestJson.response.docs.slice(0,3):requestJson.response.docs;
+      let options = requestJson.response.docs;
       let optionsTyped :FilmitemTypeBewertet[] = options.map(item=>{return{
         ...item,
         userGivenRating:1,
@@ -88,10 +93,17 @@ function Homescreen() {
       //   recFilmlist = recFilmlist.slice(0,6)
       // }
       setRecommendationReady(true);
-      solrservice.getRecommendationsForFilms(filmList,(response)=>{
-        console.log(response)
-        setRecommendationFilmList(response);
-        })
+      if(!recommendationFlag){
+        solrservice.getRecommendationsForFilms(filmList,(response)=>{
+          setRecommendationFilmEinzelndList(response);
+          })
+      }else{
+        solrservice.getNeighborRecForFilms(filmList,(response)=>{
+          setRecommendationFilmGesamtList(response);
+          console.log(response)
+          })
+      }
+      
     }
   }
 
@@ -110,12 +122,18 @@ function Homescreen() {
 
   return (
     <>
-      {recommendationReady?<RecommendationModal items={recommendationfilmList} onClose={()=>{setRecommendationReady(false);setRecommendationFilmList(undefined)}}/>:<></>}
+      {recommendationReady?<RecommendationModal itemsGesamt={recommendationFlag?recommendationfilmGesamtList:undefined} itemsEinzelnd={!recommendationFlag?recommendationfilmEinzelndList:undefined} recommendationFlag={recommendationFlag} onClose={()=>{setRecommendationReady(false);setRecommendationFilmEinzelndList(undefined)}}/>:<></>}
       <div className={"App"}>
         
         <div className={"login-box show-vertical"}>
-          
-            <h3>Recommendersystem</h3>
+            <div className='header'>
+              <h3>Recommendersystem</h3>
+              <div className='toggle-box'>
+                <FiAlignJustify style={{color:!recommendationFlag?'black':'lightgray'}} title='Einzelne Empfehlungen'/>
+                <Switch color="default" onChange={(event,checked)=>setRecommendationFlag(checked)}/>
+                <FiMinus style={{color:recommendationFlag?'black':'lightgray'}} title='Gesammte Empfehlung'/>
+              </div>
+            </div>
             <div className='searchbox'>
               <TextInput onKeyUp={(event)=>searchAction(event)} onBlur={()=>setDropdown(false)} icon={<BiSearch />} onFocusPointOut={true}/>
               {dropdown?<Dropdown items={dropdownContent} onItemClick={handleDropdownClick}/>:<></>}

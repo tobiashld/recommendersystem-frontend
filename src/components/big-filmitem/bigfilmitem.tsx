@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { FilmitemType } from '../../types/filmitem'
 import './bigfilmitem.css'
+import filmpicnotfoundnonsvg from '../dropdownitem/images.jpg'
 
 enum HoverCase {
     MouseIn,
@@ -41,12 +42,11 @@ function BigFilmItem(props:{
   return (
     <div className='bigfilmitem-box' onMouseOver={()=>handleHover(HoverCase.MouseIn)} onMouseOut={()=>handleHover(HoverCase.MouseOut)}>
         <div>
-            <img src={fullImgPath} alt={props.item.volltextName}/>
+            <img src={props.item.picture=== "undefined"?filmpicnotfoundnonsvg:fullImgPath} alt={props.item.volltextName}/>
         </div>
         {isHovering?
         <div className='bigfilmitem-information'>
-            <h3>{props.item.volltextName}</h3>
-            <p>{bereinigteBeschreibung}</p>
+            <h6>{props.item.volltextName}</h6>
         </div>:<></>}
     </div>
   )

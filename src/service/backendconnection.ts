@@ -6,7 +6,8 @@ const serviceFunctions = {
   suchFilmeZuVolltext,
   getFakeFilmArray,
   getRecommendationsForFilms,
-  suchFilmeZuId
+  suchFilmeZuId,
+  getNeighborRecForFilms
 } 
 
 function suchFilmeZuVolltext(suchString:string,cb:((response:any)=>void)){
@@ -39,7 +40,7 @@ function suchFilmeZuId(id:number,cb:((response:any)=>void)){
     
     const http = new XMLHttpRequest();
 
-    const url = "https://backend-recommendersystem.herokuapp.com/get/"+id
+    const url = "https://backend-recommendersystem.herokuapp.com/get?id="+id
     http.open("GET",url);
     http.send();
     
@@ -66,6 +67,22 @@ function getRecommendationsForFilms(filme:FilmitemType[],cb:((response:Recommend
     http.onreadystatechange=(e:Event)=>{
       if(http.readyState === 4 && http.status === 200){
         let test : {result:RecommendFilmItem[]} = JSON.parse(http.responseText)
+        if(cb)cb(test.result)
+      }
+    }
+}
+function getNeighborRecForFilms(filme:FilmitemType[],cb:((response:FilmitemType[])=>void)){
+  const http = new XMLHttpRequest();
+
+    
+    const url = "https://backend-recommendersystem.herokuapp.com/get/Geteiltenachbarn?ids="+filme.map((value:FilmitemType)=>value.id).join("+")
+
+    http.open("GET",url);
+    http.send();
+    
+    http.onreadystatechange=(e:Event)=>{
+      if(http.readyState === 4 && http.status === 200){
+        let test : {result:FilmitemType[]} = JSON.parse(http.responseText)
         if(cb)cb(test.result)
       }
     }

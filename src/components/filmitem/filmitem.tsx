@@ -4,6 +4,7 @@ import TextInput from '../input/textinput'
 import { AiFillDelete } from 'react-icons/ai'
 import { BiChevronDown,BiChevronUp } from 'react-icons/bi'
 import './filmitem.css'
+import filmpicnotfoundnonsvg from '../dropdownitem/images.jpg'
 import filmnotfoundsvg from './filmpicnotfound.svg'
 
 interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
@@ -36,7 +37,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
     <div className="filmitem-container">
       <div className={'big row flex'}>
         <div className={'flex-eins picture filmpic'} >
-            <img src={(!props.picture || props.picture === "undefined")?filmnotfoundsvg:fullImgPath} alt={props.volltextName+" bild"}/>
+            <img src={(!props.picture || props.picture === "undefined")?filmpicnotfoundnonsvg:fullImgPath} alt={props.volltextName+" bild"}/>
         </div>
         <div className={beschreibungBoxClasses}>
           <div className={"full-width title top-line"}>

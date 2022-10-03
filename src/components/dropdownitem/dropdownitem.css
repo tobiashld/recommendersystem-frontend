@@ -7,7 +7,7 @@
     height:auto;
     display:flex;
     flex-direction: row;
-    width:100%;
+    width: auto;
     z-index: 150;
 }
 .item-wrapper>.picture{

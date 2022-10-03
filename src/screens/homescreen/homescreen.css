@@ -113,6 +113,23 @@
     justify-content: center;
     width:100%
   }
+  .toggle-box{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    right:10px;
+    display: flex;
+    justify-content: center;
+  }
+  .header{
+    width: 100%;
+    text-align: center;
+    position:relative;
+
+  }
+  .active{
+    color:pink
+  }
   
   .login-box{
     background-color: white;

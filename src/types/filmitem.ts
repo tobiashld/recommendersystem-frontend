@@ -42,3 +42,6 @@ export type RecommendFilmItem = {
   releaseJahr:string,
   recommendations:FilmitemType[]
 }
+export type GeteilteNachbarnResponse = {
+  result:FilmitemType[]
+}

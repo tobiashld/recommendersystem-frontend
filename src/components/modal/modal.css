@@ -47,6 +47,8 @@
     width: 80%;
     background-color: rgb(244, 244, 244);
     border-radius: 15px;
+    padding-bottom:30px;
+    padding-top:10px;
 }
 .r-filmself-header{
     width: 100%;
