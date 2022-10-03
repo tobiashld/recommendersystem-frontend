@@ -2,11 +2,9 @@
     min-height: 90vh;
     height:auto;
     padding-top:5vh;
-    padding-bottom:4.23vh;
+    padding-bottom:5vh;
     display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    flex-direction: column;
+    justify-content: center;
     font-size: calc(10px + 2vmin);
     color: black;
     background-color: rgba(247, 247, 247, 0.933);
