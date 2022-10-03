@@ -1,0 +1,40 @@
+
+name: Build, test and Deploy
+
+on: [push]
+
+jobs:
+  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: install dependencies
+        run: npm ci
+      - name: test
+        run: node node_modules/.bin/react-scripts test
+  build:
+    runs-on: ubuntu-latest
+    if: success() && github.ref_name == 'main'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: install dependencies
+        run: npm ci
+      - name: build
+        run: node --max_old_space_size=2560 node_modules/.bin/react-scripts build
+  deploy:
+    runs-on: ubuntu-latest
+    if: success() && github.ref_name == 'main'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "env-frontend-recommendersystem" #Must be unique in Heroku
+          heroku_email: "tobiasherhold+heroku@gmail.com"
