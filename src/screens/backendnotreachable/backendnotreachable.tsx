@@ -6,7 +6,7 @@ function BackendNotReachable() {
   return (
     <div className="App align-center">
         <div className="login-box-small">
-            <h3>Warten auf Backend</h3>
+            <h3 id='header'>Warten auf Backend</h3>
             <Loadingspinner size='Big' />
         </div>
     </div>
