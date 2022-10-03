@@ -1,9 +1,9 @@
 .filmitem-container{
     overflow:hidden;
-    height:auto;
+    height:fit-content;
     width: 80%;
     border-radius:15px;
-    box-shadow:0px 0px 24px 2px rgba(0,0,0,0.25);
+    box-shadow:0px 0px 24px 2px rgba(0,0,0, 0.3);
     background-color: rgb(244, 244, 244);
     border:1px solid rgb(225, 225, 225);
     padding:10px;
@@ -11,9 +11,6 @@
     margin-bottom:15px;
     display: flex;
     justify-content: center;
-}
-.text{
-    max-height:150px;
 }
 .bewertung{
     position:absolute;
@@ -28,7 +25,7 @@
 }
 .delete:hover{
     color:red; 
-    
+    cursor: pointer;
 }
 .relative{
     position:relative;
@@ -64,5 +61,29 @@
 }
 .big{
     width: stretch;
+}
+.filmitem-chevron{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    
+
+}
+.fimitem-chevron-absolute{
+    position:absolute;
+    bottom:-10px;
+}
+.filmpic{
+    font-size:8px;
+}
+.filmitem-container-relative{
+    position:relative
+}
+.filmitem-desc-full{
+    
+}
+.filmitem-desc-full>p{
+    margin:0;
 }
 

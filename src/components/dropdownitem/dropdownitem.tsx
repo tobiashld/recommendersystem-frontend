@@ -1,11 +1,16 @@
 import React from 'react'
-import { FilmitemType } from '../../types/filmitem'
+import { FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
 import Loadingspinner from '../loadingspinner/loadingspinner'
 import './dropdownitem.css'
-function Dropdownitem(props:{item:FilmitemType|undefined,onChoice?:((item:FilmitemType|undefined)=>void)},) {
+import filmpicnotfoundsvg from './filmpicnotfound.svg'
+import filmpicnotfoundnonsvg from './images.jpg'
+function Dropdownitem(props:{item:FilmitemTypeBewertet|undefined,onChoice?:((item:FilmitemTypeBewertet|undefined)=>void)},) {
     if(!props || !props.item){
         return (<div className='item-wrapper loading-container'><Loadingspinner size='Medium'/></div>)
     }
+
+    const fullImgPath = "https://image.tmdb.org/t/p/w45"+props.item.picture;
+
   return (
     <div className='item-wrapper' onClick={()=>{
         if(props && props.onChoice){
@@ -13,10 +18,10 @@ function Dropdownitem(props:{item:FilmitemType|undefined,onChoice?:((item:Filmit
         }
     }}>
         <div className='picture'>
-            {/* <img alt={props.item.title}/> */}
+            <img src={props.item.picture=== "undefined"?filmpicnotfoundnonsvg:fullImgPath} alt={props.item.volltextName}/>
         </div>
-        <div className='flex column'>
-            <h5>{props.item.title}</h5>
+        <div className='flex column dropdown-item-text'>
+            <h5>{props.item.volltextName}</h5>
             <p>{props.item.releaseJahr}</p>
         </div>
     </div>

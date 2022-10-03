@@ -7,7 +7,7 @@
     height:auto;
     display:flex;
     flex-direction: row;
-    width:100%;
+    width: auto;
     z-index: 150;
 }
 .item-wrapper>.picture{
@@ -22,4 +22,13 @@
 .item-wrapper:hover{
     cursor: pointer;
     background-color: rgb(245, 245, 245);
+}
+.picture{
+    padding-left:10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dropdown-item-text{
+    justify-content: center;
 }
