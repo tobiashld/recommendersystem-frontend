@@ -122,7 +122,7 @@ function Homescreen() {
 
   return (
     <>
-      {recommendationReady?<RecommendationModal itemsGesamt={recommendationFlag?recommendationfilmGesamtList:undefined} itemsEinzelnd={!recommendationFlag?recommendationfilmEinzelndList:undefined} recommendationFlag={recommendationFlag} onClose={()=>{setRecommendationReady(false);setRecommendationFilmEinzelndList(undefined)}}/>:<></>}
+      {recommendationReady?<RecommendationModal itemsGesamt={recommendationFlag?recommendationfilmGesamtList:undefined} itemsEinzelnd={!recommendationFlag?recommendationfilmEinzelndList:undefined} recommendationFlag={recommendationFlag} onClose={()=>{setRecommendationReady(false);setRecommendationFilmEinzelndList(undefined);setRecommendationFilmGesamtList(undefined)}}/>:<></>}
       <div className={"App"}>
         
         <div className={"login-box show-vertical"}>
@@ -130,7 +130,7 @@ function Homescreen() {
               <h3>Recommendersystem</h3>
               <div className='toggle-box'>
                 <FiAlignJustify style={{color:!recommendationFlag?'black':'lightgray'}} title='Einzelne Empfehlungen'/>
-                <Switch color="default" onChange={(event,checked)=>setRecommendationFlag(checked)}/>
+                <Switch color="default" onChange={(event,checked)=>setRecommendationFlag(checked)} defaultChecked/>
                 <FiMinus style={{color:recommendationFlag?'black':'lightgray'}} title='Gesammte Empfehlung'/>
               </div>
             </div>

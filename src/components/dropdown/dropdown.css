@@ -21,7 +21,8 @@
 }
 .slider-box-custom{
     width:100%;
-    
+    max-height:350px;
+    height:auto
 }
 .search-arrow-up:hover,
 .search-arrow-down:hover{
