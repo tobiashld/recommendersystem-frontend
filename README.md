@@ -1,11 +1,14 @@
-# Getting Started with Create React App
+## Lokales Ausführen
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Um die Web-app lokal laufen zu lassen müssen folgende Schritte ausgeführt werden:
 
-## Available Scripts
+1. Das Repo klonen mit: `git clone https://github.com/tobiashld/recommendersystem-frontend.git`
+2. Node Pakete per `npm install` installieren
+3. Den lokalen Server starten mit: `npm start`
 
-In the project directory, you can run:
+Nun kann die Web-App unter der Adresse http://localhost:3000/ aufgerufen werden
 
+## Verfügbare Befehle im Repo
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -39,8 +42,4 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
