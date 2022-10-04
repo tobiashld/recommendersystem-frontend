@@ -32,8 +32,12 @@ function Filmitem(props:FilmitemTypeErweitert) {
   }
   const fullImgPath = "https://image.tmdb.org/t/p/w92"+props.picture;
   return (
-    <div className="filmitem-container">
-      <div className={'big row flex'}>
+    
+    <div className={"filmitem-container filmitem-container-box"}>
+      <div className={'big row flex '}>
+        <div className='delete-container' onClick={()=>{props.onDelete(props)}}>
+          <AiFillDelete size={20} className='delete'/>
+        </div>
         <div className={'flex-eins picture filmpic'} >
             <img src={(!props.picture || props.picture === "undefined")?filmpicnotfoundnonsvg:fullImgPath} alt={props.volltextName+" bild"}/>
         </div>
@@ -41,7 +45,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
           <div className={"full-width title top-line"}>
             <div className='flex-vier'>
               {props.volltextName}
-              <AiFillDelete className='delete' onClick={()=>{props.onDelete(props)}}/>
+              
             </div>
             {/* <div className='flex-eins relative'>
               <div className={'row flex bewertung'}>
@@ -73,6 +77,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
         </div>
       </div>
     </div>
+    
   )
 }
 
