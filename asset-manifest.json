@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "/recommendersystem-frontend/static/css/main.9c25527a.css",
-    "main.js": "/recommendersystem-frontend/static/js/main.2509bf90.js",
+    "main.css": "/recommendersystem-frontend/static/css/main.81819010.css",
+    "main.js": "/recommendersystem-frontend/static/js/main.4899f77c.js",
     "static/js/787.74e16db7.chunk.js": "/recommendersystem-frontend/static/js/787.74e16db7.chunk.js",
+    "static/media/images.jpeg": "/recommendersystem-frontend/static/media/images.940462a448a584379ac3.jpeg",
     "static/media/slick.svg": "/recommendersystem-frontend/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/recommendersystem-frontend/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/recommendersystem-frontend/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/recommendersystem-frontend/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/recommendersystem-frontend/index.html",
-    "main.9c25527a.css.map": "/recommendersystem-frontend/static/css/main.9c25527a.css.map",
-    "main.2509bf90.js.map": "/recommendersystem-frontend/static/js/main.2509bf90.js.map",
+    "main.81819010.css.map": "/recommendersystem-frontend/static/css/main.81819010.css.map",
+    "main.4899f77c.js.map": "/recommendersystem-frontend/static/js/main.4899f77c.js.map",
     "787.74e16db7.chunk.js.map": "/recommendersystem-frontend/static/js/787.74e16db7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9c25527a.css",
-    "static/js/main.2509bf90.js"
+    "static/css/main.81819010.css",
+    "static/js/main.4899f77c.js"
   ]
 }
