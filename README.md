@@ -8,6 +8,11 @@ Um die Web-app lokal laufen zu lassen müssen folgende Schritte ausgeführt werd
 
 Nun kann die Web-App unter der Adresse http://localhost:3000/ aufgerufen werden
 
+
+## Live Webpage 
+
+https://tobiashld.github.io/recommendersystem-frontend/
+
 ## Verfügbare Befehle im Repo
 ### `npm start`
 
