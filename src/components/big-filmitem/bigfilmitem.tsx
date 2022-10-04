@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { FilmitemType } from '../../types/filmitem'
 import './bigfilmitem.css'
-import filmpicnotfoundnonsvg from '../dropdownitem/images.jpg'
+import filmpicnotfoundnonsvg from '../dropdownitem/images.jpeg'
 
 enum HoverCase {
     MouseIn,
@@ -11,7 +11,7 @@ enum HoverCase {
 function BigFilmItem(props:{
     item:FilmitemType|undefined
 }) {
-    const [isHovering,setisHovering] = useState(false);
+    const [isHovering,setisHovering] = useState((props && props.item && props.item.picture !== "undefined")?false:true);
     //console.log(props.item)
     if(!props || !props.item){
         return (
@@ -22,6 +22,9 @@ function BigFilmItem(props:{
     }
 
     let handleHover = (isCase:HoverCase) => {
+        if(props.item?.picture === "undefined"){
+            return
+        }
         switch(isCase){
             case HoverCase.MouseIn:
                 setisHovering(true);

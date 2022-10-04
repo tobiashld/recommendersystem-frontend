@@ -3,7 +3,7 @@ import {  FilmitemTypeBewertet } from '../../types/filmitem'
 import { AiFillDelete } from 'react-icons/ai'
 import { BiChevronDown,BiChevronUp } from 'react-icons/bi'
 import './filmitem.css'
-import filmpicnotfoundnonsvg from '../dropdownitem/images.jpg'
+import filmpicnotfoundnonsvg from '../dropdownitem/images.jpeg'
 
 interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
   changeRating:((value:number)=>void),

@@ -24,7 +24,7 @@
 }
 .coverup{
     position:fixed;
-    z-index: 2;
+    z-index: 3;
     top:0px;
     left:0px;
     width: 100vw;
