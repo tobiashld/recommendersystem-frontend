@@ -36,7 +36,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
     <div className={"filmitem-container filmitem-container-box"}>
       <div className={'big row flex '}>
         <div className='delete-container' onClick={()=>{props.onDelete(props)}}>
-          <AiFillDelete size={20} className='delete'/>
+          <AiFillDelete className='delete'/>
         </div>
         <div className={'flex-eins picture filmpic'} >
             <img src={(!props.picture || props.picture === "undefined")?filmpicnotfoundnonsvg:fullImgPath} alt={props.volltextName+" bild"}/>

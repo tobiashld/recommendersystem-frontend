@@ -48,7 +48,18 @@
     border-radius:50%;
     color:white;
     background-color: rgb(250, 62, 62);
-    transform:translate(-25%,25%)
+    transform:translate(-25%,25%);
+    
+}
+@media only screen and (max-width: 600px){
+    .delete-container{
+        height:1.5em;
+        width: 1.5em;
+    }
+    .delete{
+        font-size:15px;
+    }
+
 }
 .delete-container:hover{
     background-color: rgb(182, 48, 48);
@@ -56,6 +67,7 @@
 .delete{
     height:5em;
     aspect-ratio: 1;
+    font-size:20px;
 }
 
 .title{
