@@ -1,4 +1,4 @@
-import { useRef,useState } from 'react'
+import { useEffect, useRef,useState } from 'react'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 import Slider from 'react-slick'
 import { FilmitemTypeBewertet } from '../../types/filmitem'
@@ -8,6 +8,11 @@ import './dropdown.css'
 function Dropdown(props:{items:FilmitemTypeBewertet[]|undefined,onItemClick:((item:FilmitemTypeBewertet|undefined)=>void)|undefined}) {
   const [slideIndex,setSlideIndex] = useState<number>(0);
   const sliderRef = useRef<Slider>(null);
+
+  useEffect(()=>{
+    sliderRef.current?.slickGoTo(0)
+    setSlideIndex(0)
+  },[props.items,props])
 
   if(!props || !props.items){
     return (
