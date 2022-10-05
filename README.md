@@ -1,4 +1,7 @@
 ## Lokales Ausführen
+### Voraussetzungen: 
+- Node.js (https://nodejs.org/en/)
+- git (https://git-scm.com/)
 
 Um die Web-app lokal laufen zu lassen müssen folgende Schritte ausgeführt werden:
 
