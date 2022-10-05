@@ -18,15 +18,8 @@
     right:0;
     top:0;
 }
-.delete{
-    transform: translateY(20%);
-    margin-left:5px;
-    margin-right:5px;
-}
-.delete:hover{
-    color:red; 
-    cursor: pointer;
-}
+
+
 .relative{
     position:relative;
 }
@@ -37,6 +30,44 @@
     padding-top:10px;
     padding-bottom:10px;
 
+}
+.filmitem-container-box{
+    position:relative;
+}
+.delete-container{
+    position:absolute;
+    height:1em;
+    width: 1em;
+    top:0;
+    z-index: 2;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right:0;
+    border-radius:50%;
+    color:white;
+    background-color: rgb(250, 62, 62);
+    transform:translate(-25%,25%);
+    
+}
+@media only screen and (max-width: 600px){
+    .delete-container{
+        height:1.5em;
+        width: 1.5em;
+    }
+    .delete{
+        font-size:15px;
+    }
+
+}
+.delete-container:hover{
+    background-color: rgb(182, 48, 48);
+}
+.delete{
+    height:5em;
+    aspect-ratio: 1;
+    font-size:20px;
 }
 
 .title{

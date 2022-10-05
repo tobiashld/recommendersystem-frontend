@@ -1,5 +1,4 @@
-import React from 'react'
-import { FilmitemType, GeteilteNachbarnResponse, RecommendFilmItem } from '../../types/filmitem'
+import { FilmitemType, RecommendFilmItem } from '../../types/filmitem'
 import { CgClose } from 'react-icons/cg'
 import './modal.css'
 import Slider from 'react-slick'

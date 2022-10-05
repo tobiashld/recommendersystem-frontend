@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import { FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
-import TextInput from '../input/textinput'
+import { useState } from 'react'
+import {  FilmitemTypeBewertet } from '../../types/filmitem'
 import { AiFillDelete } from 'react-icons/ai'
 import { BiChevronDown,BiChevronUp } from 'react-icons/bi'
 import './filmitem.css'
-import filmpicnotfoundnonsvg from '../dropdownitem/images.jpg'
-import filmnotfoundsvg from './filmpicnotfound.svg'
+import filmpicnotfoundnonsvg from '../dropdownitem/images.jpeg'
 
 interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
   changeRating:((value:number)=>void),
@@ -24,8 +22,8 @@ function Filmitem(props:FilmitemTypeErweitert) {
   let beschreibungClasses = "full-width description ".concat(isExpanded?"filmitem-desc-full":"gradient")
   let beschreibungBoxClasses = "flex-fuenf column text ".concat(isExpanded?"":"filmitem-container-relative")
   let chevronClasses = "filmitem-chevron ".concat(isExpanded?"":"fimitem-chevron-absolute")
-  let bereinigteBeschreibung = new String(props.beschreibung)
-  let unbereinigteBeschreibung = new String(props.beschreibung)
+  let bereinigteBeschreibung = props.beschreibung.toString()
+  let unbereinigteBeschreibung = props.beschreibung.toString()
   if(props.beschreibung.split(" ").length >= 45){
     bereinigteBeschreibung = props.beschreibung.split(" ").slice(0,45).join(" ")+ " ";
   }else if(props.beschreibung.split(" ").length === 1){
@@ -34,8 +32,12 @@ function Filmitem(props:FilmitemTypeErweitert) {
   }
   const fullImgPath = "https://image.tmdb.org/t/p/w92"+props.picture;
   return (
-    <div className="filmitem-container">
-      <div className={'big row flex'}>
+    
+    <div className={"filmitem-container filmitem-container-box"}>
+      <div className={'big row flex '}>
+        <div className='delete-container' onClick={()=>{props.onDelete(props)}}>
+          <AiFillDelete className='delete'/>
+        </div>
         <div className={'flex-eins picture filmpic'} >
             <img src={(!props.picture || props.picture === "undefined")?filmpicnotfoundnonsvg:fullImgPath} alt={props.volltextName+" bild"}/>
         </div>
@@ -43,7 +45,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
           <div className={"full-width title top-line"}>
             <div className='flex-vier'>
               {props.volltextName}
-              <AiFillDelete className='delete' onClick={()=>{props.onDelete(props)}}/>
+              
             </div>
             {/* <div className='flex-eins relative'>
               <div className={'row flex bewertung'}>
@@ -75,6 +77,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
         </div>
       </div>
     </div>
+    
   )
 }
 

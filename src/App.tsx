@@ -2,8 +2,7 @@
 import { useSelector } from 'react-redux';
 import ErrorComponent from './components/errorComponent/errorComponent';
 import Homescreen from './screens/homescreen/homescreen';
-import { addError, errorSlice } from './store/error/slice';
-import { RootState, store, useAppDispatch } from './store/error/store';
+import { RootState } from './store/error/store';
 import { useEffect, useState } from 'react'
 import serviceFunctions from './service/backendconnection';
 import BackendNotReachable from './screens/backendnotreachable/backendnotreachable';

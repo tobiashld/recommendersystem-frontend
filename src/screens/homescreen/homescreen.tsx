@@ -1,9 +1,8 @@
 import { Switch } from '@mui/material';
 import React, {useState} from 'react'
 import { BiSearch } from 'react-icons/bi';
-import { GrFormNextLink, GrSubtract, GrTextAlignFull } from 'react-icons/gr';
+import { GrFormNextLink,  } from 'react-icons/gr';
 import {FiAlignJustify, FiMinus} from 'react-icons/fi'
-import { IconContext } from 'react-icons';
 import Dropdown from '../../components/dropdown/dropdown';
 import Filmitem from '../../components/filmitem/filmitem';
 import TextInput from '../../components/input/textinput';
@@ -124,7 +123,7 @@ function Homescreen() {
     <>
       {recommendationReady?<RecommendationModal itemsGesamt={recommendationFlag?recommendationfilmGesamtList:undefined} itemsEinzelnd={!recommendationFlag?recommendationfilmEinzelndList:undefined} recommendationFlag={recommendationFlag} onClose={()=>{setRecommendationReady(false);setRecommendationFilmEinzelndList(undefined);setRecommendationFilmGesamtList(undefined)}}/>:<></>}
       <div className={"App"}>
-        <div className="toggle-pill">
+        <div className="toggle-pill show-vertical">
             <div>
                   <FiAlignJustify style={{color:!recommendationFlag?'black':'lightgray'}} title='Einzelne Empfehlungen'/>
             </div>

@@ -1,9 +1,8 @@
-import React from 'react'
-import { FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
+
+import {  FilmitemTypeBewertet } from '../../types/filmitem'
 import Loadingspinner from '../loadingspinner/loadingspinner'
 import './dropdownitem.css'
-import filmpicnotfoundsvg from './filmpicnotfound.svg'
-import filmpicnotfoundnonsvg from './images.jpg'
+import filmpicnotfoundnonsvg from './images.jpeg'
 function Dropdownitem(props:{item:FilmitemTypeBewertet|undefined,onChoice?:((item:FilmitemTypeBewertet|undefined)=>void)},) {
     if(!props || !props.item){
         return (<div className='item-wrapper loading-container'><Loadingspinner size='Medium'/></div>)
