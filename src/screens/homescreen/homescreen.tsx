@@ -99,7 +99,6 @@ function Homescreen() {
       }else{
         solrservice.getNeighborRecForFilms(filmList,(response)=>{
           setRecommendationFilmGesamtList(response);
-          console.log(response)
           })
       }
       
