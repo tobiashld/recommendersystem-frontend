@@ -38,11 +38,11 @@ function BigFilmItem(props:{
         }
     }
     
-    const fullImgPath = "https://image.tmdb.org/t/p/w154"+props.item.picture;
+    const fullImgPath = "https://image.tmdb.org/t/p/original"+props.item.picture;
   return (
     <div className='bigfilmitem-box' onMouseOver={()=>handleHover(HoverCase.MouseIn)} onMouseOut={()=>handleHover(HoverCase.MouseOut)}>
-        <div>
-            <img src={props.item.picture=== "undefined"?filmpicnotfoundnonsvg:fullImgPath} alt={props.item.volltextName}/>
+        <div >
+            <img src={props.item.picture=== "undefined"?filmpicnotfoundnonsvg:fullImgPath} alt={props.item.volltextName} className="picture-auto-resize"/>
         </div>
         {isHovering?
         <div className='bigfilmitem-information'>

@@ -39,7 +39,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
           <AiFillDelete className='delete'/>
         </div>
         <div className={'flex-eins picture filmpic'} >
-            <img src={(!props.picture || props.picture === "undefined")?filmpicnotfoundnonsvg:fullImgPath} alt={props.volltextName+" bild"}/>
+            <img src={(!props.picture || props.picture === "undefined")?filmpicnotfoundnonsvg:fullImgPath} alt={props.volltextName+" bild"} className="picture-auto-resize"/>
         </div>
         <div className={beschreibungBoxClasses}>
           <div className={"full-width title top-line"}>
