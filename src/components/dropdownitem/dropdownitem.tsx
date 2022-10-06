@@ -8,7 +8,7 @@ function Dropdownitem(props:{item:FilmitemTypeBewertet|undefined,onChoice?:((ite
         return (<div className='item-wrapper loading-container'><Loadingspinner size='Medium'/></div>)
     }
 
-    const fullImgPath = "https://image.tmdb.org/t/p/w45"+props.item.picture;
+    const fullImgPath = "https://image.tmdb.org/t/p/w92"+props.item.picture;
 
   return (
     <div className='item-wrapper' onClick={()=>{
