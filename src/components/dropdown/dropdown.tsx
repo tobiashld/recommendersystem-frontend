@@ -26,7 +26,7 @@ function Dropdown(props:{items:FilmitemTypeBewertet[]|undefined,onItemClick:((it
       accessibility:true,
       dots:false,
       speed: 500,
-      slidesToShow: 4,
+      slidesToShow: 3,
       slidesToScroll: 3,
       initialSlide: 0,
       dragable:true,
