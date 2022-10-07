@@ -7,15 +7,16 @@ import Loadingspinner from '../loadingspinner/loadingspinner'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { GrNext, GrPrevious } from 'react-icons/gr'
-
+import useOutsideAlerter from '../../hooks/useOutsideAlert'
+import {useRef} from 'react'
 function RecommendationModal(props:{
     itemsEinzelnd?:RecommendFilmItem[] | undefined,
     itemsGesamt?:FilmitemType[] | undefined,
     recommendationFlag?:boolean|undefined,
     onClose:(()=>void)
 }) {
-    
-   
+    const modalRef = useRef(null)
+   useOutsideAlerter(modalRef,()=>{if(props.onClose)props.onClose()})
     var settings = {
         dots: true,
         infinite: true,
@@ -63,8 +64,8 @@ function RecommendationModal(props:{
       };
 
     return (
-        <div className='modal-bg'>
-            <div className='modal-content-box'>
+        <div className='modal-bg' >
+            <div className='modal-content-box' ref={modalRef}>
                 <h1>Hier sind die Empfehlungen für dich:</h1>
                 {
                     (!props || (!props.itemsEinzelnd && !props.itemsGesamt))?
@@ -100,7 +101,8 @@ function RecommendationModal(props:{
                                     film.recommendations.map(
                                         (recommendation,index)=>{
                                             return (
-                                                <BigFilmItem item={recommendation} key={index} />
+                                                    <BigFilmItem item={recommendation} key={index} />
+                                                
                                             )
                                         }
                                     )
@@ -127,5 +129,7 @@ function RecommendationModal(props:{
         </div>
     )
 }
+
+
 
 export default RecommendationModal

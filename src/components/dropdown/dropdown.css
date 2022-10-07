@@ -2,7 +2,7 @@
     background-color: white;
     position:absolute;
     display:flex;
-    align-items:center;
+    align-items: center;
     overflow:hidden;
     height:auto;
     top:4rem;
@@ -23,11 +23,13 @@
     cursor: pointer;
     color:grey;
 }
+.no-result{
+    display: flex;
+    justify-content: center;
+}
 .slider-box-custom{
     width:100%;
-    padding-top:5px;
-    max-height:350px;
-    height:auto
+    height:fit-content
 }
 .search-arrow-up:hover,
 .search-arrow-down:hover{

@@ -1,5 +1,5 @@
 import { Switch } from '@mui/material';
-import React, {useState} from 'react'
+import React, {useState,useRef} from 'react'
 import { BiSearch } from 'react-icons/bi';
 import { GrFormNextLink,  } from 'react-icons/gr';
 import {FiAlignJustify, FiMinus} from 'react-icons/fi'
@@ -13,10 +13,15 @@ import { useAppDispatch } from '../../store/error/store';
 import { DBResponse } from '../../types/dbresponse';
 import { FilmitemInterfaceBewertet, FilmitemType, FilmitemTypeBewertet, RecommendFilmItem } from '../../types/filmitem';
 import './homescreen.css'
+import NavBar from '../../components/navbar/navbar';
+import navBarItems from '../../service/navbaritems';
+import useOutsideAlerter from '../../hooks/useOutsideAlert';
 
 function Homescreen() {
   const dispatch = useAppDispatch()
+  const [textinputFocus,setTextinputfocus] = useState(false)
   const [dropdown, setDropdown] = useState(false);
+  const [menueExpanded, setMenueExpanded] = useState(false)
   const [recommendationFlag,setRecommendationFlag] = useState(true)
   const [dropdownContent, setDropdownContent] = useState<FilmitemInterfaceBewertet[]>([]);
   const [reload,setReload] = useState(false)
@@ -25,6 +30,8 @@ function Homescreen() {
   const [recommendationfilmEinzelndList, setRecommendationFilmEinzelndList] = useState<RecommendFilmItem[]|undefined>([])
   const [recommendationfilmGesamtList, setRecommendationFilmGesamtList] = useState<FilmitemType[]|undefined>([])
   const [isHoveringOverNext,setIsHoveringOverNext] = useState(false)
+
+  
 
   let searchAction = (event : React.KeyboardEvent<HTMLInputElement>) => {
     
@@ -70,9 +77,11 @@ function Homescreen() {
         let helperArr = filmList;
         helperArr.push(item)
         setFilmList(helperArr)
+        
       }
       setReload(!reload)
       setDropdown(false)
+      setTextinputfocus(false)
     }
   }
 
@@ -120,6 +129,7 @@ function Homescreen() {
 
   return (
     <>
+      {menueExpanded?<NavBar onClose={()=>setMenueExpanded(false)} items={navBarItems} />:<></>}
       {recommendationReady?<RecommendationModal itemsGesamt={recommendationFlag?recommendationfilmGesamtList:undefined} itemsEinzelnd={!recommendationFlag?recommendationfilmEinzelndList:undefined} recommendationFlag={recommendationFlag} onClose={()=>{setRecommendationReady(false);setRecommendationFilmEinzelndList(undefined);setRecommendationFilmGesamtList(undefined)}}/>:<></>}
       <div className={"App"}>
         <div className="toggle-pill show-vertical">
@@ -137,8 +147,8 @@ function Homescreen() {
               
             </div>
             <div className='searchbox'>
-              <TextInput onKeyUp={(event)=>searchAction(event)} onBlur={()=>setDropdown(false)} icon={<BiSearch />} onFocusPointOut={true}/>
-              {dropdown?<Dropdown items={dropdownContent} onItemClick={handleDropdownClick}/>:<></>}
+              <TextInput setFocus={(value)=>{setTextinputfocus(value);setDropdown(value)}} focus={textinputFocus} onKeyUp={(event)=>searchAction(event)} icon={<BiSearch />} onFocusPointOut={true}/>
+              {dropdown?<Dropdown setTextinputfocus={(value)=>{setTextinputfocus(value);setDropdown(value)}} items={dropdownContent} onItemClick={handleDropdownClick}/>:<></>}
             </div>
 
             

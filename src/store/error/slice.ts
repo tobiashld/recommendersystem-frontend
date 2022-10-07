@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import BackendNotReachable from '../../screens/backendnotreachable/backendnotreachable'
+import Homescreen from '../../screens/homescreen/homescreen'
 import { Error, ErrorType } from '../../types/errortypes'
 
 interface InitialErrorState{
-    errorListe:Error[]
+    errorListe:Error[],
 }
 
 const initialState : InitialErrorState = {
-  errorListe: []
+  errorListe: [],
+  
 }
 export const errorSlice = createSlice({
   name: 'error',
@@ -18,7 +21,7 @@ export const errorSlice = createSlice({
         message:string,
         handleClose:(id:number)=>void
     }>) {
-        let helpArray = [...state.errorListe]
+        let helpArray : any = [...state.errorListe]
         let id = state.errorListe.length+1
         helpArray.push({
             id:id,
@@ -30,13 +33,16 @@ export const errorSlice = createSlice({
         
         setTimeout(action.payload.handleClose,5000)
         return ({
-            errorListe:helpArray
+            ...state,
+            errorListe:helpArray,
+            
         })
     },
     clearError(state,action) {
         let helpArray = [...state.errorListe]
         helpArray.splice(action.payload.id,1)
         return ({
+            ...state,
             errorListe:helpArray
         })
     },
