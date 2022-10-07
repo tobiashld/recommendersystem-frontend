@@ -13,9 +13,8 @@ function App() {
   const [backendOnline,setBackendOnline] = useState(false)
   useEffect(()=>{
     if(!backendOnline){
-      console.log("begin")
       serviceFunctions.suchFilmeZuVolltext("test",(response:any)=>{
-        console.log("end")
+        
         setBackendOnline(true)
       })
     }
