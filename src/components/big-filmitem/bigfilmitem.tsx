@@ -26,7 +26,7 @@ function BigFilmItem(props:{
         
     }
     
-    const fullImgPath = "https://image.tmdb.org/t/p/w500"+props.item.picture;
+    const fullImgPath = "https://image.tmdb.org/t/p/w185"+props.item.picture;
   return (
     <div className='bigfilmitem-box' >
         
