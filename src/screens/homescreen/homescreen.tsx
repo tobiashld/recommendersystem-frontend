@@ -16,6 +16,7 @@ import './homescreen.css'
 import NavBar from '../../components/navbar/navbar';
 import navBarItems from '../../service/navbaritems';
 import useOutsideAlerter from '../../hooks/useOutsideAlert';
+import FilmInfoModal from '../../components/filminfomodal/filminfomodal';
 
 function Homescreen() {
   const dispatch = useAppDispatch()
@@ -30,8 +31,8 @@ function Homescreen() {
   const [recommendationfilmEinzelndList, setRecommendationFilmEinzelndList] = useState<RecommendFilmItem[]|undefined>([])
   const [recommendationfilmGesamtList, setRecommendationFilmGesamtList] = useState<FilmitemType[]|undefined>([])
   const [isHoveringOverNext,setIsHoveringOverNext] = useState(false)
-
-  
+  const [currInfoModalItem,setCurrInfoModalItem] = useState<FilmitemType | undefined>(undefined)
+  const [showInfoModal,setShowInfoModal] = useState(false)
 
   let searchAction = (event : React.KeyboardEvent<HTMLInputElement>) => {
     
@@ -141,6 +142,7 @@ function Homescreen() {
       {menueExpanded?<NavBar onClose={()=>setMenueExpanded(false)} items={navBarItems} />:<></>}
       {recommendationReady?<RecommendationModal itemsGesamt={recommendationFlag?recommendationfilmGesamtList:undefined} itemsEinzelnd={!recommendationFlag?recommendationfilmEinzelndList:undefined} recommendationFlag={recommendationFlag} onClose={()=>{setRecommendationReady(false);setRecommendationFilmEinzelndList(undefined);setRecommendationFilmGesamtList(undefined)}}/>:<></>}
       <div className={"App"}>
+        {showInfoModal?<FilmInfoModal item={currInfoModalItem} onClose={()=>{setShowInfoModal(false)}} />:<></>}
         <div className="toggle-pill show-vertical">
             <div>
                   <FiAlignJustify style={{color:!recommendationFlag?'black':'lightgray'}} title='Einzelne Empfehlungen'/>
@@ -188,6 +190,7 @@ function Homescreen() {
                     vote_count={item.vote_count}
                     changeRating={(value:number)=>changeRating(item.id,value)}
                     onDelete={(item)=>{deleteItem(item)}}
+                    setInfoContent={(item)=>{setCurrInfoModalItem(item);setShowInfoModal(true)}}
                     ></Filmitem>):
                     <h6>Noch keine Filme hinzugefügt</h6>
                   }

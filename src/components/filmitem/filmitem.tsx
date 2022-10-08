@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import {  FilmitemTypeBewertet } from '../../types/filmitem'
+import {  FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
 import { AiFillDelete } from 'react-icons/ai'
 import { BiChevronDown,BiChevronUp } from 'react-icons/bi'
 import './filmitem.css'
 import filmpicnotfoundnonsvg from '../dropdownitem/images.jpeg'
+import { GrCircleInformation } from 'react-icons/gr'
 
 interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
   changeRating:((value:number)=>void),
-  onDelete:((item:FilmitemTypeBewertet)=>void)
+  onDelete:((item:FilmitemTypeBewertet)=>void),
+  setInfoContent:((item:FilmitemType)=>void)
 }
 
 
@@ -37,6 +39,26 @@ function Filmitem(props:FilmitemTypeErweitert) {
       <div className={'big row flex '}>
         <div className='delete-container' onClick={()=>{props.onDelete(props)}}>
           <AiFillDelete className='delete'/>
+        </div>
+        <div className='infoButton-filmitem' onClick={()=>{props.setInfoContent({
+          id:props.id,
+          adult:props.adult,
+          backdrop:props.backdrop,
+          beschreibung:props.beschreibung,
+          genre_ids:props.genre_ids,
+          isFromTmdb:props.isFromTmdb,
+          netflixid:props.netflixid,
+          original_language:props.original_language,
+          picture:props.picture,
+          popularity:props.popularity,
+          releaseJahr:props.releaseJahr,
+          searchtitle:props.searchtitle,
+          tmdb_id:props.tmdb_id,
+          volltextName:props.volltextName,
+          vote_average:props.vote_average,
+          vote_count:props.vote_count
+        })}}>
+            <GrCircleInformation className='info'/>
         </div>
         <div className={'flex-eins picture filmpic'} >
             <img src={(!props.picture || props.picture === "undefined")?filmpicnotfoundnonsvg:fullImgPath} alt={props.volltextName+" bild"} className="picture-auto-resize"/>

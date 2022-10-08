@@ -34,8 +34,8 @@
     align-items: center;
     top:10px;
     right:10px;
-    height:1.5em;
-    font-size: 1em;
+    height:1.5rem;
+    font-size: 1rem;
     border-radius: 50%;
     aspect-ratio: 1;
     background-color: lightgray;
@@ -65,8 +65,10 @@
 }
 .info-modal-header-infos>h1{
     margin-bottom:0;
+    font-size: 2rem;
 }
 .info-modal-header-infos>h3{
+    font-size:1.2rem;
     margin-top:0;
 }
 
@@ -93,7 +95,7 @@
     background-color: #62738d;
     color:white;
     border-radius: 10px;
-
+    font-size:1.2rem
 }
 .genre-container{
     width: 100%;
