@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import {  FilmitemType, FilmitemTypeBewertet } from '../../types/filmitem'
-import { AiFillDelete } from 'react-icons/ai'
+import { AiFillDelete, AiOutlineInfoCircle } from 'react-icons/ai'
 import { BiChevronDown,BiChevronUp } from 'react-icons/bi'
 import './filmitem.css'
 import filmpicnotfoundnonsvg from '../dropdownitem/images.jpeg'
@@ -58,7 +58,7 @@ function Filmitem(props:FilmitemTypeErweitert) {
           vote_average:props.vote_average,
           vote_count:props.vote_count
         })}}>
-            <GrCircleInformation className='info'/>
+            <AiOutlineInfoCircle className='info'/>
         </div>
         <div className={'flex-eins picture filmpic'} >
             <img src={(!props.picture || props.picture === "undefined")?filmpicnotfoundnonsvg:fullImgPath} alt={props.volltextName+" bild"} className="picture-auto-resize"/>
