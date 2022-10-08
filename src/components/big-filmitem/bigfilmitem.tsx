@@ -13,7 +13,6 @@ function BigFilmItem(props:{
     item:FilmitemType|undefined,
     setInfoContent:(item:FilmitemType|undefined)=>void
 }) {
-    //console.log(props.item)
     if(!props || !props.item){
         return (
             <div className='bigfilmitem-box'>
@@ -21,7 +20,6 @@ function BigFilmItem(props:{
             </div>
         )
     }
-    console.log(props.item)
     let handleHover = (isCase:HoverCase) => {
         
     }

@@ -75,6 +75,18 @@
     font-weight: 500;
     font-size:large
 }
+.clickable-link,
+.clickable-link:visited,
+.clickable-link:active{
+    display: flex;
+    align-items: center;
+    gap:5px;
+    color:white;
+    text-decoration: none;
+}
+.clickable-link-container:hover{
+    background-color: #435166;
+}
 .genre-item{
     width: fit-content;
     padding:10px;

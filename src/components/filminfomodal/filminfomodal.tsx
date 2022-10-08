@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { CgClose } from 'react-icons/cg'
+import { BsPlayCircle } from 'react-icons/bs'
 import useOutsideAlerter from '../../hooks/useOutsideAlert'
 import serviceFunctions from '../../service/backendconnection'
 import { APIGenre, APIGenreResponse } from '../../types/dbresponse'
@@ -22,7 +23,6 @@ function FilmInfoModal(props:{item:FilmitemType|undefined,onClose:()=>void}) {
   }
   serviceFunctions.getGenres((response:APIGenreResponse)=>setGenres(response.genres))
   const fullImgPath = "https://image.tmdb.org/t/p/w185"+props.item.picture;
-  console.log(props.item)
   return (
     <div className='info-modal-container'>
         <div className='info-modal-content' ref={infoContainerRef}>
@@ -62,26 +62,22 @@ function FilmInfoModal(props:{item:FilmitemType|undefined,onClose:()=>void}) {
                         :<></>
                     }
                     {
-                        props.item.popularity?
-                        <div className='genre-item'>Popularität: {props.item.popularity}</div>
-                        :<></>
-                    }
-                    {
                         props.item.vote_average?
                         <div className='genre-item'>Bewertung {props.item.vote_average}/10</div>
                         :<></>
                     }
                     {
                         props.item.vote_count?
-                        <div className='genre-item'>Anzahl Bewertungen {props.item.vote_count}</div>
+                        <div className='genre-item'>{props.item.vote_count} Bewertungen</div>
                         :<></>
-                    }
+                    }   
+                    <div className={'genre-item clickable-link-container'}><a className="clickable-link" href={'https://www.youtube.com/results?search_query='+props.item.searchtitle.split(" ").join("+")+'+trailer'} target="_blank" rel="noopener noreferrer">Trailer <BsPlayCircle /></a></div>
                     </div>
                     
                 </div>
             </div>
             <div className='info-modal-beschreibung'>
-                {props.item.beschreibung}
+                {(props.item.beschreibung && props.item.beschreibung !== "undefined")?props.item.beschreibung:"Zu diesem Film liegen keine Informationen bereit"}
             </div>
 
             

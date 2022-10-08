@@ -165,7 +165,8 @@ function Homescreen() {
               <div className="divider"></div>
             </div>
             <h5>Zum Benutzerprofil hinzugefügte Filme</h5>
-            {filmList.map((item,index)=>
+            {filmList.length > 0?
+            filmList.map((item,index)=>
                 <Filmitem 
                     key={index}
                     id={item.id}
@@ -187,7 +188,9 @@ function Homescreen() {
                     vote_count={item.vote_count}
                     changeRating={(value:number)=>changeRating(item.id,value)}
                     onDelete={(item)=>{deleteItem(item)}}
-                    ></Filmitem>)}
+                    ></Filmitem>):
+                    <h6>Noch keine Filme hinzugefügt</h6>
+                  }
         </div>
         <div className={'fixed-next-button show-vertical delay1'} onClick={()=>{handleRecommendation()}} onMouseOver={()=>setIsHoveringOverNext(true)} onMouseOut={()=>setIsHoveringOverNext(false)}>
               {isHoveringOverNext?<h6 className='fixed-next-button-text'>Recommendation</h6>:<></>}
