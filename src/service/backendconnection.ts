@@ -1,3 +1,5 @@
+import { valueToPercent } from "@mui/base";
+import { APIGenreResponse, DBFilmType, DBResponse, DBResponseBereinigt } from "../types/dbresponse";
 import { FilmitemType, RecommendFilmItem } from "../types/filmitem";
 
 const serviceFunctions = {
@@ -5,7 +7,8 @@ const serviceFunctions = {
   getFakeFilmArray,
   getRecommendationsForFilms,
   suchFilmeZuId,
-  getNeighborRecForFilms
+  getNeighborRecForFilms,
+  getGenres
 } 
 
 function suchFilmeZuVolltext(suchString:string,cb:((response:any)=>void)){
@@ -26,7 +29,9 @@ function suchFilmeZuVolltext(suchString:string,cb:((response:any)=>void)){
     
     http.onreadystatechange=(e:Event)=>{
       if(http.readyState === 4 && http.status === 200){
-        if(cb)cb(JSON.parse(JSON.stringify(http.responseText)))
+        let obj : DBResponseBereinigt = JSON.parse(JSON.stringify(http.responseText))
+        
+        if(cb)cb(obj)
       }
     }
 
@@ -82,6 +87,22 @@ function getNeighborRecForFilms(filme:FilmitemType[],cb:((response:FilmitemType[
       if(http.readyState === 4 && http.status === 200){
         let test : {result:FilmitemType[]} = JSON.parse(http.responseText)
         if(cb)cb(test.result)
+      }
+    }
+}
+
+function getGenres(cb:((response:APIGenreResponse)=>void)){
+  const http = new XMLHttpRequest();
+
+    
+    const url = "https://api.themoviedb.org/3/genre/movie/list?api_key=a7f6382813ad90507449fb80b9881d1b&language=de"
+
+    http.open("GET",url);
+    http.send();
+    
+    http.onreadystatechange=(e:Event)=>{
+      if(http.readyState === 4 && http.status === 200){
+        if(cb)cb(JSON.parse(http.responseText))
       }
     }
 }

@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, Ref } from "react";
 
-function useOutsideAlerter(ref : any,cb? : (()=>void)) {
+function useOutsideAlerter(ref : any,stop:boolean,cb? : (()=>void),) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element
        */
       function handleClickOutside(event:MouseEvent){
         if (ref.current && !ref.current.contains(event.target)) {
-          if(cb){
+          if(cb && !stop){
             cb()
           }
         }
@@ -18,7 +18,7 @@ function useOutsideAlerter(ref : any,cb? : (()=>void)) {
         // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
-    }, [ref]);
+    }, [ref,stop]);
   }
 
   export default useOutsideAlerter

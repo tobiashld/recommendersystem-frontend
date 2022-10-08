@@ -17,7 +17,7 @@ function Dropdownitem(props:{item:FilmitemTypeBewertet|undefined,onChoice?:((ite
         }
     }}>
         <div className='picture'>
-            <img src={props.item.picture=== "undefined"?filmpicnotfoundnonsvg:fullImgPath} alt={props.item.volltextName} className="picture-auto-resize"/>
+            <img src={(!props.item.picture || props.item.picture === "undefined")?filmpicnotfoundnonsvg:fullImgPath} alt={props.item.volltextName} className="picture-auto-resize"/>
         </div>
         <div className='flex column dropdown-item-text'>
             <h5>{props.item.volltextName}</h5>

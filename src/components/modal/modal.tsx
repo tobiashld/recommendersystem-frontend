@@ -8,15 +8,20 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { GrNext, GrPrevious } from 'react-icons/gr'
 import useOutsideAlerter from '../../hooks/useOutsideAlert'
-import {useRef} from 'react'
+import {useRef, useState} from 'react'
+import FilmInfoModal from '../filminfomodal/filminfomodal'
 function RecommendationModal(props:{
     itemsEinzelnd?:RecommendFilmItem[] | undefined,
     itemsGesamt?:FilmitemType[] | undefined,
     recommendationFlag?:boolean|undefined,
     onClose:(()=>void)
 }) {
+    const [showInfoModal,setShowInfoModal] = useState(false)
+    const [currInfoModalItem,setCurrInfoModalItem] = useState<FilmitemType | undefined>(undefined)
     const modalRef = useRef(null)
-   useOutsideAlerter(modalRef,()=>{if(props.onClose)props.onClose()})
+    useOutsideAlerter(modalRef,showInfoModal,()=>{if(props.onClose){props.onClose()}})
+
+
     var settings = {
         dots: true,
         infinite: true,
@@ -65,6 +70,7 @@ function RecommendationModal(props:{
 
     return (
         <div className='modal-bg' >
+            {showInfoModal?<FilmInfoModal item={currInfoModalItem} onClose={()=>{setShowInfoModal(false)}} />:<></>}
             <div className='modal-content-box' ref={modalRef}>
                 <h1>Hier sind die Empfehlungen für dich:</h1>
                 {
@@ -82,7 +88,7 @@ function RecommendationModal(props:{
                         {
                             props.itemsGesamt.map((film,index)=>{
                                 return (
-                                    <BigFilmItem item={film} key={index} />
+                                    <BigFilmItem item={film} key={index} setInfoContent={(item:FilmitemType|undefined)=>{setCurrInfoModalItem(item);setShowInfoModal(true)}}/>
                                     )
                             })
                         }
@@ -101,7 +107,7 @@ function RecommendationModal(props:{
                                     film.recommendations.map(
                                         (recommendation,index)=>{
                                             return (
-                                                    <BigFilmItem item={recommendation} key={index} />
+                                                    <BigFilmItem item={recommendation} key={index} setInfoContent={(item:FilmitemType|undefined)=>{setCurrInfoModalItem(item);setShowInfoModal(true)}}/>
                                                 
                                             )
                                         }

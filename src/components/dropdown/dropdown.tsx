@@ -10,7 +10,7 @@ function Dropdown(props:{setTextinputfocus?:(value:boolean)=>void,items:Filmitem
   const [slideIndex,setSlideIndex] = useState<number>(0);
   const sliderRef = useRef<Slider>(null);
   const dropdownRef = useRef(null)
-  useOutsideAlerter(dropdownRef,()=>{
+  useOutsideAlerter(dropdownRef,false,()=>{
     if(props && props.setTextinputfocus)props.setTextinputfocus(false)
     console.log("test")
   }

@@ -10,7 +10,7 @@ import RecommendationModal from '../../components/modal/modal';
 import solrservice from '../../service/backendconnection';
 import { addError, clearError } from '../../store/error/slice';
 import { useAppDispatch } from '../../store/error/store';
-import { DBResponse } from '../../types/dbresponse';
+import { DBResponse, DBResponseBereinigt } from '../../types/dbresponse';
 import { FilmitemInterfaceBewertet, FilmitemType, FilmitemTypeBewertet, RecommendFilmItem } from '../../types/filmitem';
 import './homescreen.css'
 import NavBar from '../../components/navbar/navbar';
@@ -51,10 +51,19 @@ function Homescreen() {
     let requestJson : DBResponse = JSON.parse(request)
     if(requestJson && requestJson.response){
       let options = requestJson.response.docs;
-      let optionsTyped :FilmitemTypeBewertet[] = options.map(item=>{return{
-        ...item,
-        userGivenRating:1,
-      }})
+      let optionsTyped :FilmitemTypeBewertet[] = options.map(item=>{
+        if(item.isFromTmdb){
+          return{
+            ...item,
+            userGivenRating:1,
+          }
+        }else{
+          return{
+            ...item,
+            userGivenRating:1,
+          }
+        }
+        })
       setDropdownContent(optionsTyped)
     }else{throw new Error("Request failed in App.tsx:handleRequest")}
   }
@@ -167,6 +176,15 @@ function Homescreen() {
                     releaseJahr={item.releaseJahr} 
                     picture={item.picture} 
                     userGivenRating={item.userGivenRating}
+                    isFromTmdb={item.isFromTmdb}
+                    adult={item.adult}
+                    backdrop={item.backdrop}
+                    genre_ids={item.genre_ids}
+                    original_language={item.original_language}
+                    popularity={item.popularity}
+                    vote_average={item.vote_average}
+                    tmdb_id={item.tmdb_id}
+                    vote_count={item.vote_count}
                     changeRating={(value:number)=>changeRating(item.id,value)}
                     onDelete={(item)=>{deleteItem(item)}}
                     ></Filmitem>)}
