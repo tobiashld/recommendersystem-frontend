@@ -4,7 +4,6 @@ import { AiFillDelete, AiOutlineInfoCircle } from 'react-icons/ai'
 import { BiChevronDown,BiChevronUp } from 'react-icons/bi'
 import './filmitem.css'
 import filmpicnotfoundnonsvg from '../dropdownitem/images.jpeg'
-import { GrCircleInformation } from 'react-icons/gr'
 
 interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
   changeRating:((value:number)=>void),

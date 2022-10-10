@@ -1,13 +1,8 @@
-import React,{useState} from 'react'
 import { FilmitemType } from '../../types/filmitem'
 import './bigfilmitem.css'
 import filmpicnotfoundnonsvg from '../dropdownitem/images.jpeg'
 import { GrCircleInformation } from 'react-icons/gr'
 
-enum HoverCase{
-    MouseIn,
-    MouseOut,
-}
 
 function BigFilmItem(props:{
     item:FilmitemType|undefined,
@@ -19,9 +14,6 @@ function BigFilmItem(props:{
                 <p>Props.item fehlt!</p>
             </div>
         )
-    }
-    let handleHover = (isCase:HoverCase) => {
-        
     }
     
     const fullImgPath = "https://image.tmdb.org/t/p/w185"+props.item.picture;

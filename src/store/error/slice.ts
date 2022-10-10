@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import BackendNotReachable from '../../screens/backendnotreachable/backendnotreachable'
-import Homescreen from '../../screens/homescreen/homescreen'
 import { Error, ErrorType } from '../../types/errortypes'
 
 interface InitialErrorState{

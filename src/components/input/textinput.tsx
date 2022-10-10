@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import useOutsideAlerter from '../../hooks/useOutsideAlert'
 import './textinput.css'
 
 type params = {

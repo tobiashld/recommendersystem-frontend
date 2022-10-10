@@ -1,5 +1,5 @@
 import { Switch } from '@mui/material';
-import React, {useState,useRef} from 'react'
+import React, {useState,} from 'react'
 import { BiSearch } from 'react-icons/bi';
 import { GrFormNextLink,  } from 'react-icons/gr';
 import {FiAlignJustify, FiMinus} from 'react-icons/fi'
@@ -10,12 +10,11 @@ import RecommendationModal from '../../components/modal/modal';
 import solrservice from '../../service/backendconnection';
 import { addError, clearError } from '../../store/error/slice';
 import { useAppDispatch } from '../../store/error/store';
-import { DBResponse, DBResponseBereinigt } from '../../types/dbresponse';
+import { DBResponse,  } from '../../types/dbresponse';
 import { FilmitemInterfaceBewertet, FilmitemType, FilmitemTypeBewertet, RecommendFilmItem } from '../../types/filmitem';
 import './homescreen.css'
 import NavBar from '../../components/navbar/navbar';
 import navBarItems from '../../service/navbaritems';
-import useOutsideAlerter from '../../hooks/useOutsideAlert';
 import FilmInfoModal from '../../components/filminfomodal/filminfomodal';
 
 function Homescreen() {

@@ -1,5 +1,4 @@
-import { valueToPercent } from "@mui/base";
-import { APIGenreResponse, DBFilmType, DBResponse, DBResponseBereinigt } from "../types/dbresponse";
+import { APIGenreResponse,   DBResponseBereinigt } from "../types/dbresponse";
 import { FilmitemType, RecommendFilmItem } from "../types/filmitem";
 
 const serviceFunctions = {

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, Ref } from "react";
+import  {  useEffect  } from "react";
 
 function useOutsideAlerter(ref : any,stop:boolean,cb? : (()=>void),) {
     useEffect(() => {
@@ -18,7 +18,7 @@ function useOutsideAlerter(ref : any,stop:boolean,cb? : (()=>void),) {
         // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
-    }, [ref,stop]);
+    }, [ref,stop,cb]);
   }
 
   export default useOutsideAlerter
