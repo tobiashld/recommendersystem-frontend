@@ -15,8 +15,6 @@ function App() {
   const [backendOnline,setBackendOnline] = useState(false)
   const isDarkMode = useThemeDetector();
   const dispatch = useAppDispatch()
-
-  
   dispatch(changeColorScheme({colorScheme:isDarkMode?'dark':'light'}))
   useEffect(()=>{
     if(!backendOnline){
