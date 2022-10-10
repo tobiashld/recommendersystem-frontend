@@ -47,31 +47,31 @@ function FilmInfoModal(props:{item:FilmitemType|undefined,onClose:()=>void}) {
                         props.item.genre_ids? 
                         
                             props.item.genre_ids.map((item:number)=>
-                                {return <div className='genre-item'>{genres.find((genre:APIGenre)=>genre.id===item)?.name}</div>}
+                                {return <div className='genre-item'><div className='genre-item-shadow'></div>{genres.find((genre:APIGenre)=>genre.id===item)?.name}</div>}
                             )
                         
                         :<></>
                     }
                     {
                         props.item.adult?
-                        <div className='genre-item'>FSK-18</div>:<></>
+                        <div className='genre-item'><div className='genre-item-shadow'></div>FSK-18</div>:<></>
                     }
                     {
                         props.item.original_language?
-                        <div className='genre-item'>Originale Sprache: {props.item.original_language}</div>
+                        <div className='genre-item'><div className='genre-item-shadow'></div>Originale Sprache: {props.item.original_language}</div>
                         :<></>
                     }
                     {
                         props.item.vote_average?
-                        <div className='genre-item'>Bewertung {props.item.vote_average}/10</div>
+                        <div className='genre-item'><div className='genre-item-shadow'></div>Bewertung {props.item.vote_average}/10</div>
                         :<></>
                     }
                     {
                         props.item.vote_count?
-                        <div className='genre-item'>{props.item.vote_count} Bewertungen</div>
+                        <div className='genre-item'><div className='genre-item-shadow'></div>{props.item.vote_count} Bewertungen</div>
                         :<></>
                     }   
-                    <div className={'genre-item clickable-link-container'}><a className="clickable-link" href={'https://www.youtube.com/results?search_query='+props.item.searchtitle.split(" ").join("+")+'+trailer'} target="_blank" rel="noopener noreferrer">Trailer <BsPlayCircle /></a></div>
+                    <div className={'genre-item clickable-link-container'}><div className='genre-item-shadow'></div><a className="clickable-link" href={'https://www.youtube.com/results?search_query='+props.item.searchtitle.split(" ").join("+")+'+trailer'} target="_blank" rel="noopener noreferrer">Trailer <BsPlayCircle /></a></div>
                     </div>
                     
                 </div>

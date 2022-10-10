@@ -5,16 +5,27 @@ import { Error, ErrorType } from '../../types/errortypes'
 
 interface InitialErrorState{
     errorListe:Error[],
+    colorScheme:'light'|'dark'
 }
 
 const initialState : InitialErrorState = {
   errorListe: [],
+  colorScheme:'light'
   
 }
 export const errorSlice = createSlice({
   name: 'error',
   initialState: initialState,
   reducers: {
+    changeColorScheme(state,action:PayloadAction<{
+        colorScheme:'light'|'dark'
+    }>){
+        return ({
+            ...state,
+            colorScheme:action.payload.colorScheme
+            
+        })
+    },
     addError(state, action:PayloadAction<{
         type:ErrorType,
         title:string,
@@ -50,6 +61,6 @@ export const errorSlice = createSlice({
 })
 
 
-export const { addError,clearError } = errorSlice.actions
+export const { addError,clearError,changeColorScheme } = errorSlice.actions
 
 export default errorSlice.reducer
