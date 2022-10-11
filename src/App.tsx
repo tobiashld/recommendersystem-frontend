@@ -9,7 +9,6 @@ import BackendNotReachable from './screens/backendnotreachable/backendnotreachab
 import useThemeDetector from './hooks/useThemeDetector';
 import { changeColorScheme } from './store/error/slice';
 
-
 function App() {
   const errorliste = useSelector((state:RootState)=>state.errorListe)
   const [backendOnline,setBackendOnline] = useState(false)
