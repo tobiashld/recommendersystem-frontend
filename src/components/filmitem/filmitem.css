@@ -60,6 +60,10 @@
         height:1.5em;
         width: 1.5em;
     }
+    .infoButton-filmitem{
+        height:1.5em;
+        width: 1.5em;
+    }
     .delete{
         font-size:15px;
     }
@@ -69,15 +73,53 @@
     background-color: rgb(182, 48, 48);
 }
 .delete{
-    height:5em;
+    height:1.5em;
     aspect-ratio: 1;
     font-size:20px;
 }
-
+.info{
+    height:1.5em;
+    aspect-ratio: 1;
+    font-size:1em;
+}
+.infoButton-filmitem{
+    position:absolute;
+    height:1em;
+    width: 1em;
+    z-index: 2;
+    transform:translate(-25%,25%);
+    /*
+    position:absolute;
+    height:1em;
+    width: 1em;
+    top:0;
+    z-index: 2;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right:0;
+    border-radius:50%;
+    color:white;
+    background-color: rgb(250, 62, 62);
+    transform:translate(-25%,25%);
+    */
+    top:0;
+    right:1.1em;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.infoButton-filmitem:hover{
+   color:rgb(150, 150, 150)
+}
 .title{
     font-size:20px;
     font-weight: 700;
-    padding-right:1.5em;
+    padding-right:3em;
 }
  
 .top-line{

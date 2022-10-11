@@ -1,0 +1,26 @@
+.navbar-container{
+    width:clamp(200px,30vw,450px);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height:100vh;
+    background-color: white;
+}
+.navbar-shadow{
+    /* background-color: pink; */
+    background-color: rgba(94, 94, 94, 0.432);
+height:100vh;
+width: stretch;
+}
+
+.navbar-complete{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    height:100vh;
+    width: 100vw;
+    z-index: 200;
+
+    top:0;
+    left:0;
+}

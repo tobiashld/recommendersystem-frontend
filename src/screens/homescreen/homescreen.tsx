@@ -1,5 +1,5 @@
 import { Switch } from '@mui/material';
-import React, {useState} from 'react'
+import React, {useState,} from 'react'
 import { BiSearch } from 'react-icons/bi';
 import { GrFormNextLink,  } from 'react-icons/gr';
 import {FiAlignJustify, FiMinus} from 'react-icons/fi'
@@ -10,13 +10,18 @@ import RecommendationModal from '../../components/modal/modal';
 import solrservice from '../../service/backendconnection';
 import { addError, clearError } from '../../store/error/slice';
 import { useAppDispatch } from '../../store/error/store';
-import { DBResponse } from '../../types/dbresponse';
+import { DBResponse,  } from '../../types/dbresponse';
 import { FilmitemInterfaceBewertet, FilmitemType, FilmitemTypeBewertet, RecommendFilmItem } from '../../types/filmitem';
 import './homescreen.css'
+import NavBar from '../../components/navbar/navbar';
+import navBarItems from '../../service/navbaritems';
+import FilmInfoModal from '../../components/filminfomodal/filminfomodal';
 
 function Homescreen() {
   const dispatch = useAppDispatch()
+  const [textinputFocus,setTextinputfocus] = useState(false)
   const [dropdown, setDropdown] = useState(false);
+  const [menueExpanded, setMenueExpanded] = useState(false)
   const [recommendationFlag,setRecommendationFlag] = useState(true)
   const [dropdownContent, setDropdownContent] = useState<FilmitemInterfaceBewertet[]>([]);
   const [reload,setReload] = useState(false)
@@ -25,6 +30,8 @@ function Homescreen() {
   const [recommendationfilmEinzelndList, setRecommendationFilmEinzelndList] = useState<RecommendFilmItem[]|undefined>([])
   const [recommendationfilmGesamtList, setRecommendationFilmGesamtList] = useState<FilmitemType[]|undefined>([])
   const [isHoveringOverNext,setIsHoveringOverNext] = useState(false)
+  const [currInfoModalItem,setCurrInfoModalItem] = useState<FilmitemType | undefined>(undefined)
+  const [showInfoModal,setShowInfoModal] = useState(false)
 
   let searchAction = (event : React.KeyboardEvent<HTMLInputElement>) => {
     
@@ -44,10 +51,19 @@ function Homescreen() {
     let requestJson : DBResponse = JSON.parse(request)
     if(requestJson && requestJson.response){
       let options = requestJson.response.docs;
-      let optionsTyped :FilmitemTypeBewertet[] = options.map(item=>{return{
-        ...item,
-        userGivenRating:1,
-      }})
+      let optionsTyped :FilmitemTypeBewertet[] = options.map(item=>{
+        if(item.isFromTmdb){
+          return{
+            ...item,
+            userGivenRating:1,
+          }
+        }else{
+          return{
+            ...item,
+            userGivenRating:1,
+          }
+        }
+        })
       setDropdownContent(optionsTyped)
     }else{throw new Error("Request failed in App.tsx:handleRequest")}
   }
@@ -70,9 +86,11 @@ function Homescreen() {
         let helperArr = filmList;
         helperArr.push(item)
         setFilmList(helperArr)
+        
       }
       setReload(!reload)
       setDropdown(false)
+      setTextinputfocus(false)
     }
   }
 
@@ -120,8 +138,10 @@ function Homescreen() {
 
   return (
     <>
+      {menueExpanded?<NavBar onClose={()=>setMenueExpanded(false)} items={navBarItems} />:<></>}
       {recommendationReady?<RecommendationModal itemsGesamt={recommendationFlag?recommendationfilmGesamtList:undefined} itemsEinzelnd={!recommendationFlag?recommendationfilmEinzelndList:undefined} recommendationFlag={recommendationFlag} onClose={()=>{setRecommendationReady(false);setRecommendationFilmEinzelndList(undefined);setRecommendationFilmGesamtList(undefined)}}/>:<></>}
       <div className={"App"}>
+        {showInfoModal?<FilmInfoModal item={currInfoModalItem} onClose={()=>{setShowInfoModal(false)}} />:<></>}
         <div className="toggle-pill show-vertical">
             <div>
                   <FiAlignJustify style={{color:!recommendationFlag?'black':'lightgray'}} title='Einzelne Empfehlungen'/>
@@ -137,8 +157,8 @@ function Homescreen() {
               
             </div>
             <div className='searchbox'>
-              <TextInput onKeyUp={(event)=>searchAction(event)} onBlur={()=>setDropdown(false)} icon={<BiSearch />} onFocusPointOut={true}/>
-              {dropdown?<Dropdown items={dropdownContent} onItemClick={handleDropdownClick}/>:<></>}
+              <TextInput setFocus={(value)=>{setTextinputfocus(value);setDropdown(value)}} focus={textinputFocus} onKeyUp={(event)=>searchAction(event)} icon={<BiSearch />} onFocusPointOut={true}/>
+              {dropdown?<Dropdown setTextinputfocus={(value)=>{setTextinputfocus(value);setDropdown(value)}} items={dropdownContent} onItemClick={handleDropdownClick}/>:<></>}
             </div>
 
             
@@ -146,7 +166,8 @@ function Homescreen() {
               <div className="divider"></div>
             </div>
             <h5>Zum Benutzerprofil hinzugefügte Filme</h5>
-            {filmList.map((item,index)=>
+            {filmList.length > 0?
+            filmList.map((item,index)=>
                 <Filmitem 
                     key={index}
                     id={item.id}
@@ -157,9 +178,21 @@ function Homescreen() {
                     releaseJahr={item.releaseJahr} 
                     picture={item.picture} 
                     userGivenRating={item.userGivenRating}
+                    isFromTmdb={item.isFromTmdb}
+                    adult={item.adult}
+                    backdrop={item.backdrop}
+                    genre_ids={item.genre_ids}
+                    original_language={item.original_language}
+                    popularity={item.popularity}
+                    vote_average={item.vote_average}
+                    tmdb_id={item.tmdb_id}
+                    vote_count={item.vote_count}
                     changeRating={(value:number)=>changeRating(item.id,value)}
                     onDelete={(item)=>{deleteItem(item)}}
-                    ></Filmitem>)}
+                    setInfoContent={(item)=>{setCurrInfoModalItem(item);setShowInfoModal(true)}}
+                    ></Filmitem>):
+                    <h6>Noch keine Filme hinzugefügt</h6>
+                  }
         </div>
         <div className={'fixed-next-button show-vertical delay1'} onClick={()=>{handleRecommendation()}} onMouseOver={()=>setIsHoveringOverNext(true)} onMouseOut={()=>setIsHoveringOverNext(false)}>
               {isHoveringOverNext?<h6 className='fixed-next-button-text'>Recommendation</h6>:<></>}

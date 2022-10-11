@@ -6,7 +6,9 @@ type params = {
     onChange?: ((event:React.ChangeEvent<HTMLInputElement>)=>void),
     onKeyDown?: ((event:React.KeyboardEvent<HTMLInputElement>)=>void),
     onKeyUp?: ((event:React.KeyboardEvent<HTMLInputElement>)=>void),
-    onBlur?: (()=>void)
+    onBlur?: ((event?:React.FocusEvent<HTMLInputElement,Element>)=>void),
+    setFocus?:(value:boolean)=>void,
+    dropdownRef?:React.Ref<any>,
     regexValidator?:string,
     style?: string,
     pattern?: string,
@@ -14,11 +16,12 @@ type params = {
     placeholder?:string,
     children?:any,
     icon?:any,
+    focus?:boolean
     size?:'Big' | 'Small'
 }
 
 function TextInput(props:params) {
-  const [focus,setFocus] = useState(false)
+  
   const [value, setValue] = useState("")
 
   if(!props){
@@ -31,7 +34,7 @@ function TextInput(props:params) {
 
   return (
     <>
-      {props.onFocusPointOut?<><div className={focus?'coverup':'coverup-gone'} onClick={()=>{if(props.onBlur)props.onBlur()}}></div></>:<></>}
+      {(props.onFocusPointOut)?<><div className={props.focus?'coverup':'coverup-gone'} onClick={(event)=>{if(props.onBlur&&props.setFocus){props.onBlur();props.setFocus(false)}}}></div></>:<></>}
       <div className='container'>
           {props.icon?<div className="icon">{props.icon}</div>:<></>}
           <input 
@@ -64,12 +67,13 @@ function TextInput(props:params) {
                 if(props.onKeyUp)props.onKeyUp(event)
               }}
               placeholder={props.placeholder?props.placeholder:undefined}   
-              onFocus={()=>{setFocus(true)}}  
+              onFocus={()=>{if(props.setFocus)props.setFocus(true)}}  
               pattern={props.pattern?props.pattern:undefined}   
               onBlur={(event)=>{if(props.onBlur){
-                setFocus(false)
-                // event.currentTarget.value = ""
-                // props.onBlur(event)
+                props.onBlur(event)};
+                if(props.setFocus){
+                //props.setFocus(false)
+                //props.onBlur(event)
               }}}
               >{props.children}</input>
       </div>

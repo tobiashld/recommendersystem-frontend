@@ -7,7 +7,16 @@ export interface FilmitemInterfaceBewertet {
     picture:string, 
     releaseJahr:string,
     userGivenRating:number,
-    
+    isFromTmdb:boolean,
+  adult:boolean,
+  backdrop:string,
+  genre_ids:number[],
+  original_language:string,
+  popularity:number,
+  vote_average:number,
+  tmdb_id:number,
+  vote_count:number,
+  
   }
 
 
@@ -19,6 +28,15 @@ export type FilmitemType ={
   beschreibung: string, 
   picture:string, 
   releaseJahr:string,
+  isFromTmdb:boolean,
+  adult:boolean,
+  backdrop:string,
+  genre_ids:number[],
+  original_language:string,
+  popularity:number,
+  vote_average:number,
+  tmdb_id:number,
+  vote_count:number,
   
 }
 export type FilmitemTypeBewertet ={
@@ -30,6 +48,15 @@ export type FilmitemTypeBewertet ={
   picture:string, 
   releaseJahr:string,
   userGivenRating:number,
+  isFromTmdb:boolean,
+  adult:boolean,
+  backdrop:string,
+  genre_ids:number[],
+  original_language:string,
+  popularity:number,
+  vote_average:number,
+  tmdb_id:number,
+  vote_count:number,
   
 }
 export type RecommendFilmItem = {
@@ -41,6 +68,16 @@ export type RecommendFilmItem = {
   picture:string, 
   releaseJahr:string,
   recommendations:FilmitemType[]
+  isFromTmdb:boolean,
+  adult:boolean,
+  backdrop:string,
+  genre_ids:number[],
+  original_language:string,
+  popularity:number,
+  vote_average:number,
+  tmdb_id:number,
+  vote_count:number,
+  
 }
 export type GeteilteNachbarnResponse = {
   result:FilmitemType[]

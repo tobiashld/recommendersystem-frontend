@@ -3,7 +3,7 @@ name: CI/CD
 on: 
   push:
     branches:
-      - 'produktion'
+      - 'Produktion'
 
 jobs:
   ci-cd:

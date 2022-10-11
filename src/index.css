@@ -10,4 +10,9 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
-  
+  .slick-track{
+    height:auto !important
+}
+.bardeen-root{
+  display: none !important;
+}
