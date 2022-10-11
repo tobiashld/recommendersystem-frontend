@@ -25,6 +25,16 @@ const PRECACHE_URLS = [
   'static/',
 ];
 
+
+/* eslint-disable no-undef */
+if (workbox) {
+  console.log(`Workbox is loaded 🎉`);
+} else {
+  console.log(`Workbox didn't load `);
+}
+// eslint-disable-next-line
+workbox.precaching.precacheAndRoute(self.__precacheManifest);
+
 // The install handler takes care of precaching the resources we always need.
 self.addEventListener('install', event => {
   event.waitUntil(

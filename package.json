@@ -16,8 +16,11 @@
     "@types/react": "^18.0.19",
     "@types/react-dom": "^18.0.6",
     "@types/react-slick": "^0.23.10",
+    "customize-cra": "^1.0.0",
     "gh-pages": "^4.0.0",
     "react": "^18.2.0",
+    "react-app-rewire-workbox": "^2.0.1",
+    "react-app-rewired": "^2.2.1",
     "react-device-detect": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
@@ -26,9 +29,11 @@
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "typescript": "^4.8.3",
+    "web-vitals": "^2.1.4",
     "workbox-background-sync": "^6.5.4",
     "workbox-broadcast-update": "^6.5.4",
     "workbox-cacheable-response": "^6.5.4",
+    "workbox-cli": "^6.5.4",
     "workbox-core": "^6.5.4",
     "workbox-expiration": "^6.5.4",
     "workbox-google-analytics": "^6.5.4",
@@ -38,16 +43,15 @@
     "workbox-routing": "^6.5.4",
     "workbox-strategies": "^6.5.4",
     "workbox-streams": "^6.5.4",
-    "web-vitals": "^2.1.4"
+    "workbox-webpack-plugin": "^4.3.1"
   },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "dev": "react-scripts start",
-    "start": "react-scripts start",
-    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": [
@@ -66,8 +70,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "sw-precache": "^5.2.1"
   }
 }
