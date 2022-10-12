@@ -13,6 +13,6 @@ body {
   .slick-track{
     height:auto !important
 }
-.bardeen-root{
+#bardeen-root{
   display: none !important;
 }
