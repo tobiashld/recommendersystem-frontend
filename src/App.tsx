@@ -10,8 +10,8 @@ import useThemeDetector from './hooks/useThemeDetector';
 import { changeColorScheme } from './store/error/slice';
 import OfflineHomescreen from './screens/offlinehomescreen/offlinehomescreen';
 
-
 function App(props:{status:'online'|'offline'}) {
+
   const errorliste = useSelector((state:RootState)=>state.errorListe)
   const [backendOnline,setBackendOnline] = useState(false)
   const isDarkMode = useThemeDetector();
