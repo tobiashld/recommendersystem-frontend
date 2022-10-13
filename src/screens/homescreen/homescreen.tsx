@@ -157,7 +157,7 @@ function Homescreen() {
               
             </div>
             <div className='searchbox'>
-              <TextInput setFocus={(value)=>{setTextinputfocus(value);setDropdown(value)}} focus={textinputFocus} onKeyUp={(event)=>searchAction(event)} icon={<BiSearch />} onFocusPointOut={true}/>
+              <TextInput placeholder='Suche hier nach Filmen' setFocus={(value)=>{setTextinputfocus(value);setDropdown(value)}} focus={textinputFocus} onKeyUp={(event)=>searchAction(event)} icon={<BiSearch />} onFocusPointOut={true}/>
               {dropdown?<Dropdown setTextinputfocus={(value)=>{setTextinputfocus(value);setDropdown(value)}} items={dropdownContent} onItemClick={handleDropdownClick}/>:<></>}
             </div>
 

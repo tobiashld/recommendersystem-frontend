@@ -175,7 +175,17 @@
     background-color:lightgray;
   }
   
- 
+ @media only screen and (max-width:600px){
+    .login-box{
+      width: 100vw;
+      height:100vh;
+      border-radius: 0;
+      padding:0;
+    }
+    .App{
+      padding:0
+    }
+ }
   
   
   

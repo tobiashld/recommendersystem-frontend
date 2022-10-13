@@ -46,9 +46,9 @@ function FilmInfoModal(props:{item:FilmitemType|undefined,onClose:()=>void}) {
                     {
                         props.item.genre_ids? 
                         
-                            props.item.genre_ids.map((item:number)=>
-                                {return <div className='genre-item'><div className='genre-item-shadow'></div>{genres.find((genre:APIGenre)=>genre.id===item)?.name}</div>}
-                            )
+                        props.item.genre_ids.map((item:number,index)=>
+                        {return <div key={index} className='genre-item'><div className='genre-item-shadow'></div>{genres.find((genre:APIGenre)=>genre.id===item)?.name}</div>}
+                        )
                         
                         :<></>
                     }
