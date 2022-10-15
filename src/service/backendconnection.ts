@@ -9,6 +9,7 @@ const serviceFunctions = {
   getNeighborRecForFilms,
   getGenres
 } 
+const dynamicurl = window.location.href.includes("localhost")?"http://localhost:5000":"https://backend-recommendersystem.herokuapp.com"
 
 function suchFilmeZuVolltext(suchString:string,cb:((response:any)=>void)){
     // suchString = suchString.toLowerCase();
@@ -21,7 +22,8 @@ function suchFilmeZuVolltext(suchString:string,cb:((response:any)=>void)){
     const http = new XMLHttpRequest();
 
     //const url = "http://solrrecommendersystem.cf:8984/solr/filme/select?q=searchtitle%3A"+endsuchstring+"&q.op=OR&rows=3"
-    const url = "https://backend-recommendersystem.herokuapp.com/dropdownsearch?searchtitle="+suchString.split(" ").join("+")
+    //const url = "https://backend-recommendersystem.herokuapp.com/dropdownsearch?searchtitle="+suchString.split(" ").join("+")
+    const url = dynamicurl + "/dropdownsearch?searchtitle="+suchString.split(" ").join("+")
     //const url = "http://localhost:5000/dropdownsearch?searchtitle="+suchString.split(" ").join("+")
     http.open("GET",url);
     http.send();
@@ -42,7 +44,7 @@ function suchFilmeZuId(id:number,cb:((response:any)=>void)){
     
     const http = new XMLHttpRequest();
 
-    const url = "https://backend-recommendersystem.herokuapp.com/get?id="+id
+    const url = dynamicurl + "/get?id="+id
     http.open("GET",url);
     http.send();
     
@@ -61,7 +63,7 @@ function getRecommendationsForFilms(filme:FilmitemType[],cb:((response:Recommend
   const http = new XMLHttpRequest();
 
     
-    const url = "https://backend-recommendersystem.herokuapp.com/get/Sammlung?ids="+filme.map((value:FilmitemType)=>value.id).join("+")
+    const url = dynamicurl + "/get/Sammlung?ids="+filme.map((value:FilmitemType)=>value.id).join("+")
 
     http.open("GET",url);
     http.send();
@@ -77,7 +79,7 @@ function getNeighborRecForFilms(filme:FilmitemType[],cb:((response:FilmitemType[
   const http = new XMLHttpRequest();
 
     
-    const url = "https://backend-recommendersystem.herokuapp.com/get/Geteiltenachbarn?ids="+filme.map((value:FilmitemType)=>value.id).join("+")
+  const url = dynamicurl + "/get/Geteiltenachbarn?ids="+filme.map((value:FilmitemType)=>value.id).join("+")
 
     http.open("GET",url);
     http.send();
