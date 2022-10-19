@@ -131,8 +131,6 @@ self.addEventListener('fetch', event => {
         });
       })
     );
-  }else{
-    event.respondWith(async function(){return await fetch(event.request)}())
   }
 });
 // self.addEventListener('fetch', (event) => {
