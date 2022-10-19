@@ -44,9 +44,9 @@ function Homescreen() {
       setDropdownContent([])
       setDropdown(false);
     }
-    if(currentClientStatus === 'online'){
-      solrservice.suchFilmeZuVolltext(event.currentTarget.value,handleRequest);
-    }else{
+    // if(currentClientStatus === 'online'){
+    //   solrservice.suchFilmeZuVolltext(event.currentTarget.value,handleRequest);
+    // }else{
       const regex = new RegExp(event.currentTarget.value)
       db.table("filmitems").filter((item:FilmitemType)=>regex.test(item.searchtitle)).toArray().then(array=>{
         let optionsTyped :FilmitemTypeBewertet[] = array.map(item=>{
@@ -64,7 +64,7 @@ function Homescreen() {
           })
         setDropdownContent(optionsTyped)
       })
-    }
+    // }
     
     
     

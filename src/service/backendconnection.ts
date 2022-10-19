@@ -36,7 +36,7 @@ function suchFilmeZuVolltext(suchString:string,cb:((response:any)=>void)){
           console.log("aajajajaja")
           for(let currFilm of obj.response.docs){
 
-            db.table("filmitems").put({...currFilm,picture:'undefined'},currFilm.id).then(value=>{
+            db.table("filmitems").put({...currFilm,picture:"undefined"},currFilm.id).then(value=>{
               if(value){
                 console.log("funktioniert")
               }else{
