@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react'
 import serviceFunctions from './service/backendconnection';
 import BackendNotReachable from './screens/backendnotreachable/backendnotreachable';
 import useThemeDetector from './hooks/useThemeDetector';
-import { changeColorScheme } from './store/error/slice';
+import { changeClientStatus, changeColorScheme } from './store/error/slice';
 import OfflineHomescreen from './screens/offlinehomescreen/offlinehomescreen';
+import { db } from './store/indexedDB';
 
 function App(props:{status:'online'|'offline'}) {
 
@@ -16,12 +17,25 @@ function App(props:{status:'online'|'offline'}) {
   const [backendOnline,setBackendOnline] = useState(false)
   const isDarkMode = useThemeDetector();
   const dispatch = useAppDispatch()
+
   dispatch(changeColorScheme({colorScheme:isDarkMode?'dark':'light'}))
+
+  useEffect(()=>{
+    dispatch(changeClientStatus({clientStatus:props.status}))
+  },[props,props.status,dispatch])
+
   useEffect(()=>{
     if(!backendOnline && props.status === "online"){
       serviceFunctions.suchFilmeZuVolltext("test",(response:any)=>{
-        
         setBackendOnline(true)
+      })
+    }else{
+      db.table("filmitems").count().then(count=>{
+        if(count > 0){
+          setBackendOnline(true)
+        }else{
+          //none items in cache errormeldung
+        }
       })
     }
   })
@@ -38,7 +52,13 @@ function App(props:{status:'online'|'offline'}) {
           :
           <BackendNotReachable />
       :
-      <OfflineHomescreen />
+      (backendOnline) ?
+          <>
+            <Homescreen />
+            <ErrorComponent errorListe={errorliste}/>
+          </>
+          :
+          <OfflineHomescreen />
     }
     
   </>)

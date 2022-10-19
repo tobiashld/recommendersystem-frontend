@@ -12,7 +12,6 @@ function Dropdown(props:{setTextinputfocus?:(value:boolean)=>void,items:Filmitem
   const dropdownRef = useRef(null)
   useOutsideAlerter(dropdownRef,false,()=>{
     if(props && props.setTextinputfocus)props.setTextinputfocus(false)
-    console.log("test")
   }
     
   )

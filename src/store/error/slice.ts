@@ -3,13 +3,14 @@ import { Error, ErrorType } from '../../types/errortypes'
 
 interface InitialErrorState{
     errorListe:Error[],
-    colorScheme:'light'|'dark'
+    colorScheme:'light'|'dark',
+    currentClientStatus:'online'|'offline'
 }
 
 const initialState : InitialErrorState = {
   errorListe: [],
-  colorScheme:'light'
-  
+  colorScheme:'light',
+  currentClientStatus:'offline'
 }
 export const errorSlice = createSlice({
   name: 'error',
@@ -22,6 +23,14 @@ export const errorSlice = createSlice({
             ...state,
             colorScheme:action.payload.colorScheme
             
+        })
+    },
+    changeClientStatus(state,action:PayloadAction<{
+        clientStatus:'offline'|'online'
+    }>){
+        return ({
+            ...state,
+            currentClientStatus:action.payload.clientStatus
         })
     },
     addError(state, action:PayloadAction<{
@@ -59,6 +68,6 @@ export const errorSlice = createSlice({
 })
 
 
-export const { addError,clearError,changeColorScheme } = errorSlice.actions
+export const { addError,clearError,changeColorScheme,changeClientStatus } = errorSlice.actions
 
 export default errorSlice.reducer

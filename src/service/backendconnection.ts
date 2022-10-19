@@ -1,3 +1,4 @@
+import { db } from "../store/indexedDB";
 import { APIGenreResponse,   DBResponseBereinigt } from "../types/dbresponse";
 import { FilmitemType, RecommendFilmItem } from "../types/filmitem";
 
@@ -30,9 +31,22 @@ function suchFilmeZuVolltext(suchString:string,cb:((response:any)=>void)){
     
     http.onreadystatechange=(e:Event)=>{
       if(http.readyState === 4 && http.status === 200){
-        let obj : DBResponseBereinigt = JSON.parse(JSON.stringify(http.responseText))
-        
+        let obj : DBResponseBereinigt = JSON.parse(http.responseText)
+        if(obj && obj.response && obj.response.docs){
+          console.log("aajajajaja")
+          for(let currFilm of obj.response.docs){
+
+            db.table("filmitems").put({...currFilm,picture:undefined},currFilm.id).then(value=>{
+              if(value){
+                console.log("funktioniert")
+              }else{
+                console.log("funktioniert nicht")
+              }
+            })
+          }
+        }
         if(cb)cb(obj)
+        
       }
     }
 
