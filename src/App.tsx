@@ -45,7 +45,6 @@ function App(props:{status:'online'|'offline'}) {
     }
   })
   
-  
   return (
   <>
     {(props.status === 'online')?
