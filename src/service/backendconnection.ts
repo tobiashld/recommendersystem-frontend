@@ -13,38 +13,21 @@ const serviceFunctions = {
 const dynamicurl = window.location.href.includes("localhost")?"http://localhost:5000":"https://backend-recommendersystem.herokuapp.com"
 
 function suchFilmeZuVolltext(suchString:string,cb:((response:any)=>void)){
-    // suchString = suchString.toLowerCase();
-    // //suchString = suchString.split(" ").length > 1?'"'+suchString+'"~2':"*"+suchString+"*";
-    // let endsuchstring = ""
-    // for(let word of suchString.split(" ")){
-    //   endsuchstring += "*"+word+"*";
-    // }
-    
     const http = new XMLHttpRequest();
-
-    //const url = "http://solrrecommendersystem.cf:8984/solr/filme/select?q=searchtitle%3A"+endsuchstring+"&q.op=OR&rows=3"
-    //const url = "https://backend-recommendersystem.herokuapp.com/dropdownsearch?searchtitle="+suchString.split(" ").join("+")
     const url = dynamicurl + "/dropdownsearch?searchtitle="+suchString.split(" ").join("+")
-    //const url = "http://localhost:5000/dropdownsearch?searchtitle="+suchString.split(" ").join("+")
     http.open("GET",url);
     http.send();
     
     http.onreadystatechange=(e:Event)=>{
       if(http.readyState === 4 && http.status === 200){
         let obj : DBResponseBereinigt = JSON.parse(http.responseText)
-        if(obj && obj.response && obj.response.docs){
-          console.log("aajajajaja")
-          for(let currFilm of obj.response.docs){
 
-            db.table("filmitems").put({...currFilm,picture:"undefined"},currFilm.id).then(value=>{
-              if(value){
-                console.log("funktioniert")
-              }else{
-                console.log("funktioniert nicht")
-              }
-            })
+        if(obj && obj.response && obj.response.docs){
+          for(let currFilm of obj.response.docs){
+            db.table("filmitems").put({...currFilm,picture:"undefined"},currFilm.id)
           }
         }
+
         if(cb)cb(obj)
         
       }
