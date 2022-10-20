@@ -9,16 +9,19 @@ import TextInput from '../../components/input/textinput';
 import RecommendationModal from '../../components/modal/modal';
 import solrservice from '../../service/backendconnection';
 import { addError, clearError } from '../../store/error/slice';
-import { useAppDispatch } from '../../store/error/store';
+import { RootState, useAppDispatch } from '../../store/error/store';
 import { DBResponse,  } from '../../types/dbresponse';
 import { FilmitemInterfaceBewertet, FilmitemType, FilmitemTypeBewertet, RecommendFilmItem } from '../../types/filmitem';
 import './homescreen.css'
 import NavBar from '../../components/navbar/navbar';
 import navBarItems from '../../service/navbaritems';
 import FilmInfoModal from '../../components/filminfomodal/filminfomodal';
+import { useSelector } from 'react-redux';
+import { db } from '../../store/indexedDB';
 
 function Homescreen() {
   const dispatch = useAppDispatch()
+  const currentClientStatus = useSelector((state:RootState)=>state.currentClientStatus)
   const [textinputFocus,setTextinputfocus] = useState(false)
   const [dropdown, setDropdown] = useState(false);
   const [menueExpanded, setMenueExpanded] = useState(false)
@@ -41,16 +44,36 @@ function Homescreen() {
       setDropdownContent([])
       setDropdown(false);
     }
-    solrservice.suchFilmeZuVolltext(event.currentTarget.value,handleRequest);
+    if(currentClientStatus === 'online'){
+      solrservice.suchFilmeZuVolltext(event.currentTarget.value,handleRequest);
+    }else{
+      const regex = new RegExp(event.currentTarget.value)
+      db.table("filmitems").filter((item:FilmitemType)=>regex.test(item.searchtitle)).toArray().then(array=>{
+        let optionsTyped :FilmitemTypeBewertet[] = array.map(item=>{
+          if(item.isFromTmdb){
+            return{
+              ...item,
+              userGivenRating:1,
+            }
+          }else{
+            return{
+              ...item,
+              userGivenRating:1,
+            }
+          }
+          })
+        setDropdownContent(optionsTyped)
+      })
+    }
+    
     
     
     
   }
 
-  let handleRequest = (request:any )=>{
-    let requestJson : DBResponse = JSON.parse(request)
-    if(requestJson && requestJson.response){
-      let options = requestJson.response.docs;
+  let handleRequest = (request:DBResponse )=>{
+    if(request && request.response){
+      let options = request.response.docs;
       let optionsTyped :FilmitemTypeBewertet[] = options.map(item=>{
         if(item.isFromTmdb){
           return{
@@ -102,6 +125,14 @@ function Homescreen() {
         message:"Du musst mindestens einen Film hinzugefügt haben",
         handleClose:(id:number)=>dispatch(clearError({id:id}))
       }))
+    }else if(currentClientStatus === 'offline'){
+      dispatch(addError({
+        type:"warning",
+        title:"Offline",
+        message:"Um Filme empfohlen zu bekommen musst du Online sein!",
+        handleClose:(id:number)=>dispatch(clearError({id:id}))
+      }))
+
     }else{
       //request und scheiß
       

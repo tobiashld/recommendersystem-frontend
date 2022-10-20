@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import TextInput from './textinput';
 
-test('ErrorComponent renders with title and message',()=>{
+test('TextInput focusable',()=>{
    
     render(<TextInput placeholder='test' />)
     screen.getByPlaceholderText('test').focus()

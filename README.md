@@ -2,6 +2,7 @@
 ### Voraussetzungen: 
 - Node.js (https://nodejs.org/en/)
 - git (https://git-scm.com/)
+- laufende Installation dieses Repos https://github.com/tobiashld/recommendersystem-backend.git
 
 Um die Web-app lokal laufen zu lassen müssen folgende Schritte ausgeführt werden:
 

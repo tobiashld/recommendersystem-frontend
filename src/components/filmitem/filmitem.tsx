@@ -14,9 +14,7 @@ interface FilmitemTypeErweitert extends FilmitemTypeBewertet {
 
 function Filmitem(props:FilmitemTypeErweitert) {
   const [isExpanded,setIsExpanded] = useState(false)
-
-  if(!props || !props.volltextName || !props.beschreibung || !props.picture){
-    console.log('filmitem props überprüfen!')
+  if(!props || !props.volltextName || !props.beschreibung){
 
     throw new Error("filmitem props überprüfen!")
   }
