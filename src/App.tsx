@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import serviceFunctions from './service/backendconnection';
 import BackendNotReachable from './screens/backendnotreachable/backendnotreachable';
 import useThemeDetector from './hooks/useThemeDetector';
-import { changeClientStatus, changeColorScheme } from './store/error/slice';
+import { addError, changeClientStatus, changeColorScheme, clearError } from './store/error/slice';
 import OfflineHomescreen from './screens/offlinehomescreen/offlinehomescreen';
 import { db } from './store/indexedDB';
 
@@ -34,7 +34,12 @@ function App(props:{status:'online'|'offline'}) {
         if(count > 0){
           setBackendOnline(true)
         }else{
-          //none items in cache errormeldung
+          dispatch(addError({
+            type:"warning",
+            title:"Offline",
+            message:"Sie sind Offline und es wurden noch keine Filme gecached",
+            handleClose:(id:number)=>dispatch(clearError({id:id}))
+          }))
         }
       })
     }

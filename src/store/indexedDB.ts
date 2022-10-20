@@ -1,10 +1,9 @@
 import Dexie from "dexie";
 import { FilmitemType } from "../types/filmitem";
 
-export class MyAppDatabase extends Dexie {
+export class FilmItemDatabase extends Dexie {
     filmitems!: Dexie.Table<FilmitemType,number>;
     
-
     constructor(){
         super("recommendersystem-offline-cache");
         this.version(1).stores({
@@ -13,4 +12,4 @@ export class MyAppDatabase extends Dexie {
     }
 }
 
-export const db = new MyAppDatabase();
+export const db = new FilmItemDatabase();
