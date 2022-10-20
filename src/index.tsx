@@ -5,7 +5,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { store } from "./store/error/store";
 import { register } from "./serviceWorkerRegistration";
-// import { Offline, Online, PollingConfig } from 'react-detect-offline'
+import { Offline, Online} from 'react-detect-offline'
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -19,12 +19,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <Online polling={pollingConfig}> */}
+      <Online >
         <App status="online"/>
-      {/* </Online>
-      <Offline polling={pollingConfig}>
+      </Online>
+      <Offline >
         <App status="offline"/>
-      </Offline> */}
+      </Offline>
     </Provider>
   </React.StrictMode>
 );
