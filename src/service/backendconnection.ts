@@ -10,7 +10,7 @@ const serviceFunctions = {
   getNeighborRecForFilms,
   getGenres
 } 
-const dynamicurl = window.location.href.includes("localhost")?"http://localhost:5000":"https://backend-recommendersystem.herokuapp.com"
+const dynamicurl = window.location.href.includes("localhost")?"http://127.0.0.1:5000":"https://backend-recommendersystem.herokuapp.com"
 
 function suchFilmeZuVolltext(suchString:string,cb:((response:any)=>void)){
     const http = new XMLHttpRequest();
